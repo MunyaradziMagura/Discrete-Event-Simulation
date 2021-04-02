@@ -1,37 +1,38 @@
-# Python 3 code to demonstrate basics of SimPy package 
-# Simulation of a Traffic Light 
-  
-# import the SimPy package 
-import simpy 
-  
-# Generator function that defines the working of the traffic light 
-# "timeout()" function makes next yield statement wait for a 
-# given time passed as the argument 
-def Traffic_Light(env): 
-  
-    while True: 
-  
-        print ("Light turns GRN at " + str(env.now)) 
-          
-        # Light is green for 25 seconds 
-        yield env.timeout(25)         
-  
-        print ("Light turns YEL at " + str(env.now))
-          
-        # Light is yellow for 5 seconds 
-        yield env.timeout(5) 
-  
-        print ("Light turns RED at " + str(env.now)) 
-          
-        # Light is red for 60 seconds 
-        yield env.timeout(60) 
-  
-# env is the environment variable 
-env = simpy.Environment()         
-  
-# The process defined by the function Traffic_Light(env) 
-# is added to the environment 
-env.process(Traffic_Light(env)) 
-  
-# The process is run for the first 180 seconds (180 is not included) 
-env.run(until = 180)
+# import
+import simpy
+from random import randint
+
+# config
+TALKS_PER_SESSION = 3
+TALK_LENGTH = 30
+BREAK_LENGTH = 15
+ATTENDEES = 3
+
+# process function
+def attendee(env, name, knowledge=0, hunger=0):
+    talks = 0
+    breaks = 0
+    while True:
+        # Visit talks
+        for i in range(TALKS_PER_SESSION):
+            knowledge += randint(0, 3) / (1 + hunger)
+            hunger += randint(1, 4)
+            talks += 1
+            yield env.timeout(TALK_LENGTH)
+
+        print('Attendee %s finished %d talks with knowledge %.2f and hunger %.2f.' % (name, talks, knowledge, hunger))
+
+        # Go to buffet
+        food = randint(3, 12)
+        hunger -= min(food, hunger)
+        breaks += 1
+
+        yield env.timeout(BREAK_LENGTH)
+
+        print('Attendee %s has finished break %d with hunger %.2f' % (name, breaks, hunger))
+
+# setup environment and run simulation
+env = simpy.Environment()
+for i in range(ATTENDEES):
+    env.process(attendee(env, i))
+env.run(until=250)
