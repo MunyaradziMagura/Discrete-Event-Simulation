@@ -1,9 +1,10 @@
 # import
+import userInput
 import simpy
 from random import randint
-
+print()
 # config
-TALKS_PER_SESSION = 3
+TALKS_PER_SESSION = userInput.numberOfTest
 TALK_LENGTH = 30
 BREAK_LENGTH = 15
 ATTENDEES = 3
