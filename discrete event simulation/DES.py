@@ -16,7 +16,12 @@ def pipe_generator(env, start_temperature, start_vibration, limit_temperature, l
 
         # time until the next sensor is reached by water 
         time = random.expovariate(1.0 / sensor_interval_time)
-        
+
+        # create a new sensor when time has passed
+        yield env.timeout(time)
+
+        sensor_id += 1
+
 
 
 
