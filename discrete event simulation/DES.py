@@ -20,13 +20,15 @@ def pipe_generator(env, start_temperature, start_vibration, limit_temperature, l
         # create a new sensor when time has passed
         yield env.timeout(time)
 
+        # incriment the sensors by 1
         sensor_id += 1
-
-
 
 
 # this function is the waters journey through the pipe 
 def sensor_generator(env, sensor_id,start_temperature, start_vibration, limit_temperature, limit_vibration,sensor):
+    # record the time the water starts changing tempreture at this sensor
+    current_time = env.now
+    print("Sensor: {sensor_id} started changing tempretures at {current_time}, its current tempreture is {start_temperature}")
     pass
 
 env.Enviroment()
