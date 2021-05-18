@@ -35,4 +35,5 @@ def sensor_generator(env, sensor_id,start_temperature, start_vibration, limit_te
         # stop if no sensor is found 
         yield req
 
-env.Enviroment()
+# initlise the descrete event simulation enviroment
+env = simpy.Enviroment()
