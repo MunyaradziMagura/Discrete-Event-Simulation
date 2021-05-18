@@ -29,6 +29,10 @@ def sensor_generator(env, sensor_id,start_temperature, start_vibration, limit_te
     # record the time the water starts changing tempreture at this sensor
     current_time = env.now
     print("Sensor: {sensor_id} started changing tempretures at {current_time}, its current tempreture is {start_temperature}")
-    pass
+    
+    # request the sensor data
+    with sensor.request() as req:
+        # stop if no sensor is found 
+        yield req
 
 env.Enviroment()
