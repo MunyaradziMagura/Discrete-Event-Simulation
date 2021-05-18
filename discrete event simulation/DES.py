@@ -14,6 +14,10 @@ def pipe_generator(env, start_temperature, start_vibration, limit_temperature, l
         # run the water instance for this sensor i.e. simulate water running though this section of the pipe 
         env.process(water)
 
+        # time until the next sensor is reached by water 
+        time = random.expovariate(1.0 / sensor_interval_time)
+        
+
 
 
 # this function is the waters journey through the pipe 
