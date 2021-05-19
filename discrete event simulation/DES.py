@@ -30,8 +30,8 @@ def sensor_generator(env, sensor_id,start_temperature, start_vibration, limit_te
     # record the time the water starts changing tempreture at this sensor
     current_time = env.now
     print("Sensor:",sensor_id," started changing tempretures at",current_time," its current tempreture is ",start_temperature)
-    
-    
+    highest_temp = start_temperature
+    temperature = start_temperature
     # request the sensor data
     with sensor.request() as req:
         # stop if no sensor is found 
@@ -41,8 +41,16 @@ def sensor_generator(env, sensor_id,start_temperature, start_vibration, limit_te
         sensor_time_left = env.now
 
         con_time = random.expovariate(1.0 / sensor_interval_time)
+
+        for i in range(sensor_interval_time):
+            # update new hight 
+            if highest_temp < temperature:
+                highest_temp = temperature
+            print("running time: ", env.now)
+            yield env.timeout(sensor_interval_time) 
         
-        yield env.timeout(con_time)
+        yield env.timeout(con_time, highest_temp)
+        
 
 
 
