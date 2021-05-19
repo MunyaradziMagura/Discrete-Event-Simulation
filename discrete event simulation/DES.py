@@ -7,7 +7,7 @@ def pipe_generator(env, start_temperature, start_vibration, limit_temperature, l
     sensor_id = 0
 
     # because there are only three sensors
-    while True:
+    while True and sensor_id < 3:
         #  create an instance of the water within the pipe
         water = sensor_generator(env, sensor_id,start_temperature, start_vibration, limit_temperature, limit_vibration, sensor_interval_time,sensor)
 
@@ -42,12 +42,13 @@ def sensor_generator(env, sensor_id,start_temperature, start_vibration, limit_te
 
         con_time = random.expovariate(1.0 / sensor_interval_time)
 
-        for i in range(sensor_interval_time):
-            # update new hight 
-            if highest_temp < temperature:
-                highest_temp = temperature
-            print("running time: ", env.now)
-            yield env.timeout(sensor_interval_time) 
+        while True:
+            interarrival = random.expovariate(sensor_id + 1)
+            # instead of yielding the arrival time, yield a Timeout Event
+            yield env.timeout(interarrival)
+
+            # to make things interesting, we add some printouts
+            print( f'changed {env.now:5.2f}')
         
         yield env.timeout(con_time, highest_temp)
         
