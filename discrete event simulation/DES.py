@@ -1,5 +1,6 @@
 import simpy
 import random
+import secrets
 
 #  generate the pipe 
 def pipe_generator(env, start_temperature, start_vibration, limit_temperature, limit_vibration, sensor_interval_time, sensor, warning_temp):
@@ -39,20 +40,24 @@ def sensor_generator(env, sensor_id,start_temperature,highest_temp, start_vibrat
     # record the time the water starts changing tempreture at this sensor
     current_time = env.now
     print("Sensor:",sensor_id," started changing tempretures at",current_time," its current tempreture is ",start_temperature)
-    
+    # temperature 
     temperature = start_temperature
+    # vibration 
+
     # request the sensor data
     with sensor.request() as req:
         # stop if no sensor is found 
         yield req
-
-       
         con_time = random.expovariate(1.0 / sensor_interval_time)
         
         while True:
-
+            
             # print("highest temp = ", highest_temp)
             interarrival = random.expovariate(sensor_id + 1)
+
+            vibration = secrets.randbelow(start_vibration)
+            while vibration == 0:
+                vibration = secrets.randbelow(start_vibration)
 
             if temperature >= warning_temp[1] and temperature < warning_temp[2]: 
                 print("WARNING PIPE IS WARMING UP")
@@ -65,6 +70,7 @@ def sensor_generator(env, sensor_id,start_temperature,highest_temp, start_vibrat
                 temperature -= random.expovariate(1.0/interarrival) + (highest_temp / 3)
             else:
                 temperature += random.expovariate(1.0/interarrival)
+
             # get the final tempreture 
             highest_temp = temperature
             
@@ -72,14 +78,8 @@ def sensor_generator(env, sensor_id,start_temperature,highest_temp, start_vibrat
             yield env.timeout(interarrival,highest_temp)
 
             # to make things interesting, we add some printouts
-            print( f'temp changed to {temperature:5.2f} Celsius at {env.now:5.2f} min/s')
-        
-        yield env.timeout(con_time, highest_temp)
-        
+            print( f'temp changed to {temperature:5.2f} degree/s Celsius at {env.now:5.2f} min/s || vibrated by {vibration} cubic meters')
 
-
-
-    # how fast it travles in cubic meters
 
 
 # initlise the descrete event simulation enviroment
@@ -90,7 +90,7 @@ sensor = simpy.Resource(env, capacity=1)
 start_temperature = 24
 # [good, warning, cold-red]
 warning_temp = [start_temperature, 38, 39]
-start_vibration = 2
+start_vibration = 10
 limit_temperature = 40
 limit_vibration = 40
 sensor_interval_time = 20
