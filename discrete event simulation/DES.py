@@ -30,7 +30,12 @@ def pipe_generator(env, start_temperature, start_vibration, limit_temperature, l
 
 # this function is the waters journey through the pipe 
 def sensor_generator(env, sensor_id,start_temperature,highest_temp, start_vibration, limit_temperature, limit_vibration, sensor_interval_time, sensor, warning_temp):
-    
+        # time left for the sensor
+    sensor_time_left = env.active_process   
+    print(f"distance travled is {sensor_time_left}")
+    if sensor_id == 3:
+        print("HELLO WORLD")
+        print(f"distance travled is {sensor_time_left}")
     # record the time the water starts changing tempreture at this sensor
     current_time = env.now
     print("Sensor:",sensor_id," started changing tempretures at",current_time," its current tempreture is ",start_temperature)
@@ -41,12 +46,11 @@ def sensor_generator(env, sensor_id,start_temperature,highest_temp, start_vibrat
         # stop if no sensor is found 
         yield req
 
-        # time left for the sensor
-        sensor_time_left = env.now
-        
+       
         con_time = random.expovariate(1.0 / sensor_interval_time)
         
         while True:
+
             # print("highest temp = ", highest_temp)
             interarrival = random.expovariate(sensor_id + 1)
 
