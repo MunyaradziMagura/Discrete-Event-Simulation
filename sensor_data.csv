@@ -1,19 +1,476 @@
 time,sensor_one_temp,sensor_one_warning,sensor_one_alarm,sensor_one_emergency,sensor_one_vib,sensor_one_warning_vib,sensor_one_alarm_vib,sensor_one_emergency_vib,sensor_two_temp,sensor_two_warning,sensor_two_alarm,sensor_two_emergency,sensor_two_temp_vib,sensor_two_warning_vib,sensor_two_alarm_vib,sensor_two_emergency_vib,sensor_three_temp,sensor_three_warning,sensor_three_alarm,sensor_three_emergency,sensor_three_temp_vib,sensor_three_warning_vib,sensor_three_alarm_vib,sensor_three_emergency_vib
- 0.00,26.34 ,False,False,False,2,False,False,False,24,False,False,False,10,False,False,False,24,False,False,False,10,False,False,False
- 1.98,26.55 ,True,False,False,8,True,True,False,24,False,False,False,10,False,False,False,24,False,False,False,10,False,False,False
- 3.11,28.16 ,True,False,False,9,True,True,False,24,False,False,False,10,False,False,False,24,False,False,False,10,False,False,False
- 4.34,28.22 ,True,False,False,7,True,True,False,24,False,False,False,10,False,False,False,24,False,False,False,10,False,False,False
- 4.58,28.44 ,False,False,False,2,False,False,False,24,False,False,False,10,False,False,False,24,False,False,False,10,False,False,False
- 5.15,28.90 ,False,False,False,3,False,False,False,24,False,False,False,10,False,False,False,24,False,False,False,10,False,False,False
- 6.19,29.21 ,True,False,False,4,True,False,False,24,False,False,False,10,False,False,False,24,False,False,False,10,False,False,False
- 6.39,29.25 ,True,False,False,8,True,True,False,24,False,False,False,10,False,False,False,24,False,False,False,10,False,False,False
- 6.78,29.34 ,False,False,False,3,False,False,False,24,False,False,False,10,False,False,False,24,False,False,False,10,False,False,False
- 7.92,30.26 ,True,False,False,9,True,True,False,24,False,False,False,10,False,False,False,24,False,False,False,10,False,False,False
- 8.65,30.31 ,False,False,False,2,False,False,False,24,False,False,False,10,False,False,False,24,False,False,False,10,False,False,False
-10.06,33.89 ,False,False,False,1,False,False,False,24,False,False,False,10,False,False,False,24,False,False,False,10,False,False,False
-11.34,33.90 ,True,False,False,9,True,True,False,24,False,False,False,10,False,False,False,24,False,False,False,10,False,False,False
-11.38,34.12 ,True,False,False,4,True,False,False,24,False,False,False,10,False,False,False,24,False,False,False,10,False,False,False
-11.60,34.99 ,False,False,False,3,False,False,False,24,False,False,False,10,False,False,False,24,False,False,False,10,False,False,False
-13.23,35.61 ,True,False,False,4,True,False,False,24,False,False,False,10,False,False,False,24,False,False,False,10,False,False,False
+0.000,24.00 ,False,False,False,10,False,False,False,24,False,False,False,10,False,False,False,24,False,False,False,10,False,False,False
+ 0.00,24.36 ,True,False,False,5,True,False,False,24,False,False,False,10,False,False,False,24,False,False,False,10,False,False,False
+ 0.52,24.49 ,True,False,False,9,True,True,False,24,False,False,False,10,False,False,False,24,False,False,False,10,False,False,False
+ 0.59,25.27 ,False,False,False,3,False,False,False,24,False,False,False,10,False,False,False,24,False,False,False,10,False,False,False
+ 1.17,25.28 ,False,False,False,3,False,False,False,24,False,False,False,10,False,False,False,24,False,False,False,10,False,False,False
+ 2.15,25.40 ,True,False,False,7,True,True,False,24,False,False,False,10,False,False,False,24,False,False,False,10,False,False,False
+ 2.37,27.20 ,True,False,False,6,True,False,False,24,False,False,False,10,False,False,False,24,False,False,False,10,False,False,False
 
+3.211,24,None,None,None,10,None,None,None,24.00 ,False,False,False,10,False,False,False,24,False,False,False,10,False,False,False
+ 3.21,Done,24,None,None,None,Done,None,None,None,24.51 ,False,False,False,1,False,False,False,24,False,False,False,10,False,False,False
+ 3.37,Done,24,None,None,None,Done,None,None,None,27.33 ,True,False,False,5,True,False,False,24,False,False,False,10,False,False,False
+ 3.55,Done,24,None,None,None,Done,None,None,None,26.90 ,True,False,False,8,True,True,False,24,False,False,False,10,False,False,False
+ 3.61,Done,24,None,None,None,Done,None,None,None,28.50 ,False,False,False,1,False,False,False,24,False,False,False,10,False,False,False
+ 4.36,Done,24,None,None,None,Done,None,None,None,28.87 ,False,False,False,2,False,False,False,24,False,False,False,10,False,False,False
+ 4.99,Done,24,None,None,None,Done,None,None,None,27.23 ,False,False,False,2,False,False,False,24,False,False,False,10,False,False,False
+ 5.00,Done,24,None,None,None,Done,None,None,None,29.19 ,False,False,False,2,False,False,False,24,False,False,False,10,False,False,False
+ 5.11,Done,24,None,None,None,Done,None,None,None,27.35 ,True,False,False,5,True,False,False,24,False,False,False,10,False,False,False
+ 5.34,Done,24,None,None,None,Done,None,None,None,29.26 ,False,False,False,2,False,False,False,24,False,False,False,10,False,False,False
 
+5.463,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,24.00 ,False,False,False,10,False,False,False
+ 5.46,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,24.10 ,False,False,False,1,False,False,False
+ 5.46,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,27.63 ,False,False,False,1,False,False,False
+ 5.57,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,24.11 ,True,False,False,8,True,True,False
+ 5.62,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,28.58 ,True,False,False,4,True,False,False
+ 6.00,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,24.13 ,True,False,False,9,True,True,False
+ 6.03,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,24.33 ,True,False,False,9,True,True,False
+ 6.13,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,24.33 ,False,False,False,2,False,False,False
+ 6.17,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,24.43 ,True,False,False,5,True,False,False
+ 6.28,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,24.51 ,False,False,False,1,False,False,False
+ 6.46,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,31.33 ,False,False,False,1,False,False,False
+ 6.50,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,24.64 ,True,False,False,5,True,False,False
+ 6.76,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,25.08 ,False,False,False,3,False,False,False
+ 6.95,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,29.26 ,True,False,False,8,True,True,False
+ 6.98,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,30.32 ,False,False,False,1,False,False,False
+ 7.05,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,31.35 ,True,False,False,5,True,False,False
+ 7.30,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,31.06 ,True,False,False,9,True,True,False
+ 7.31,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,31.36 ,False,False,False,2,False,False,False
+ 7.33,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,31.40 ,True,False,False,5,True,False,False
+ 7.38,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,31.43 ,False,False,False,3,False,False,False
+ 7.57,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,31.13 ,False,False,False,2,False,False,False
+ 7.61,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,25.17 ,True,False,False,4,True,False,False
+ 7.64,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,32.04 ,True,False,False,5,True,False,False
+ 8.05,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,25.40 ,True,False,False,8,True,True,False
+ 8.16,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,31.42 ,True,False,False,9,True,True,False
+ 8.18,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,25.43 ,False,False,False,3,False,False,False
+ 8.37,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,34.33 ,True,False,False,8,True,True,False
+ 8.39,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,25.93 ,False,False,False,3,False,False,False
+ 8.44,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,32.34 ,True,False,False,9,True,True,False
+ 8.61,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,25.98 ,True,False,False,8,True,True,False
+ 8.93,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,26.02 ,False,False,False,2,False,False,False
+ 9.02,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,26.04 ,True,False,False,7,True,True,False
+ 9.05,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,26.20 ,False,False,False,1,False,False,False
+ 9.27,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,32.42 ,False,False,False,3,False,False,False
+ 9.29,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,26.27 ,True,False,False,6,True,False,False
+ 9.37,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,37.18 ,True,False,False,6,True,False,False
+ 9.48,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,26.57 ,True,False,False,9,True,True,False
+ 9.71,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,34.45 ,True,False,False,4,True,False,False
+ 9.82,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,34.64 ,False,False,False,2,False,False,False
+10.03,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,27.22 ,True,False,False,7,True,True,False
+10.12,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,34.73 ,True,False,False,6,True,False,False
+10.49,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,34.96 ,True,False,False,7,True,True,False
+10.51,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,27.23 ,True,False,False,7,True,True,False
+10.55,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,27.52 ,True,False,False,5,True,False,False
+10.67,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,37.34 ,False,False,False,1,False,False,False
+10.91,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,37.50 ,True,False,False,9,True,True,False
+10.98,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,35.13 ,True,False,False,4,True,False,False
+11.08,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,38.75 ,True,True,False,7,True,True,False
+11.14,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,27.56 ,False,False,False,2,False,False,False
+11.31,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,29.45 ,True,False,False,9,True,True,False
+11.41,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.45 ,False,True,True,1,False,False,False
+11.61,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,29.45 ,True,False,False,5,True,False,False
+11.61,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,30.38 ,True,False,False,6,True,False,False
+11.69,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,36.07 ,True,False,False,7,True,True,False
+12.14,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.51 ,False,True,True,1,False,False,False
+12.22,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,30.53 ,True,False,False,7,True,True,False
+12.30,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,36.13 ,True,False,False,5,True,False,False
+12.46,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,36.93 ,True,False,False,7,True,True,False
+12.79,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.84 ,True,True,True,7,True,True,False
+12.81,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,30.53 ,False,False,False,1,False,False,False
+12.82,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,32.24 ,True,False,False,8,True,True,False
+12.86,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,37.09 ,True,False,False,4,True,False,False
+13.22,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,40.00 ,True,True,True,6,True,False,False
+13.35,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,32.24 ,False,False,False,1,False,False,False
+13.35,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,32.49 ,True,False,False,8,True,True,False
+13.44,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,32.56 ,False,False,False,3,False,False,False
+13.52,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,37.22 ,False,False,False,1,False,False,False
+13.56,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,40.35 ,True,True,True,7,True,True,False
+13.64,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,38.59 ,False,True,False,2,False,False,False
+14.03,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,32.67 ,False,False,False,1,False,False,False
+14.10,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,33.26 ,True,False,False,6,True,False,False
+14.23,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,38.93 ,False,True,False,1,False,False,False
+14.43,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,26.79 ,True,False,False,6,True,False,False
+14.53,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,26.80 ,True,False,False,8,True,True,False
+14.67,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,33.58 ,True,False,False,8,True,True,False
+14.77,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,26.93 ,False,False,False,1,False,False,False
+14.85,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,27.58 ,False,False,False,2,False,False,False
+15.05,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,33.86 ,True,False,False,8,True,True,False
+15.19,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,34.15 ,False,False,False,2,False,False,False
+15.33,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,40.55 ,True,True,True,7,True,True,False
+15.79,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,34.17 ,False,False,False,2,False,False,False
+15.80,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,34.92 ,False,False,False,2,False,False,False
+15.87,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,27.69 ,False,False,False,1,False,False,False
+16.03,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,28.70 ,True,False,False,9,True,True,False
+16.14,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,25.99 ,True,False,False,9,True,True,False
+16.23,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,35.18 ,True,False,False,6,True,False,False
+16.42,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,35.21 ,False,False,False,1,False,False,False
+16.66,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,35.85 ,True,False,False,4,True,False,False
+16.69,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,26.34 ,False,False,False,3,False,False,False
+16.93,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,28.76 ,True,False,False,8,True,True,False
+17.00,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,28.76 ,True,False,False,6,True,False,False
+17.03,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,29.26 ,False,False,False,1,False,False,False
+17.04,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,35.98 ,True,False,False,7,True,True,False
+17.27,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,29.29 ,False,False,False,1,False,False,False
+17.51,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,26.75 ,True,False,False,9,True,True,False
+17.62,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,36.12 ,True,False,False,9,True,True,False
+17.76,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,31.14 ,False,False,False,3,False,False,False
+17.79,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,27.67 ,True,False,False,8,True,True,False
+17.96,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,36.13 ,True,False,False,6,True,False,False
+17.98,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,36.13 ,True,False,False,5,True,False,False
+18.24,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,36.64 ,True,False,False,5,True,False,False
+18.37,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,27.71 ,False,False,False,1,False,False,False
+18.38,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,27.80 ,False,False,False,1,False,False,False
+18.39,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,31.31 ,True,False,False,4,True,False,False
+18.45,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,27.95 ,False,False,False,3,False,False,False
+18.55,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,37.15 ,True,False,False,6,True,False,False
+18.68,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,31.36 ,True,False,False,4,True,False,False
+18.95,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,37.70 ,True,False,False,7,True,True,False
+19.07,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,31.70 ,True,False,False,7,True,True,False
+19.26,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,28.12 ,True,False,False,5,True,False,False
+19.43,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,28.37 ,True,False,False,7,True,True,False
+19.65,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,28.40 ,False,False,False,3,False,False,False
+19.66,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,31.96 ,True,False,False,4,True,False,False
+19.74,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,38.63 ,False,True,False,2,False,False,False
+19.78,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,28.40 ,True,False,False,6,True,False,False
+19.78,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,28.57 ,False,False,False,2,False,False,False
+19.89,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,33.31 ,True,False,False,4,True,False,False
+20.01,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,31.57 ,True,False,False,8,True,True,False
+20.26,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,38.74 ,True,True,False,4,True,False,False
+20.34,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,38.75 ,True,True,False,8,True,True,False
+20.37,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,38.81 ,True,True,False,7,True,True,False
+20.41,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,33.65 ,True,False,False,7,True,True,False
+20.41,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.41 ,False,True,True,3,False,False,False
+21.06,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.44 ,True,True,True,7,True,True,False
+21.16,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.62 ,True,True,True,9,True,True,False
+21.18,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,33.88 ,False,False,False,2,False,False,False
+21.42,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,33.89 ,False,False,False,1,False,False,False
+21.51,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,31.85 ,True,False,False,8,True,True,False
+21.56,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,38.83 ,True,True,False,9,True,True,False
+21.56,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.62 ,True,True,True,9,True,True,False
+21.57,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.83 ,True,True,True,8,True,True,False
+21.72,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,32.22 ,True,False,False,8,True,True,False
+21.98,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.89 ,True,True,True,5,True,False,False
+22.08,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,41.15 ,True,True,True,8,True,True,False
+22.50,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.33 ,False,True,True,3,False,False,False
+22.64,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,32.70 ,True,False,False,5,True,False,False
+22.86,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,33.89 ,True,False,False,6,True,False,False
+22.87,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.33 ,True,True,True,7,True,True,False
+22.89,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.43 ,False,True,True,3,False,False,False
+23.01,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,27.42 ,True,False,False,9,True,True,False
+23.11,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,27.73 ,True,False,False,5,True,False,False
+23.13,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.44 ,True,True,True,9,True,True,False
+23.50,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,27.81 ,True,False,False,4,True,False,False
+23.68,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.58 ,True,True,True,7,True,True,False
+23.76,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,27.81 ,True,False,False,4,True,False,False
+23.77,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,27.84 ,True,False,False,8,True,True,False
+23.81,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,27.99 ,False,False,False,3,False,False,False
+23.97,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,28.25 ,True,False,False,9,True,True,False
+24.10,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,28.26 ,False,False,False,1,False,False,False
+24.14,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,29.12 ,True,False,False,9,True,True,False
+24.27,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,34.06 ,True,False,False,7,True,True,False
+24.28,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.59 ,False,True,True,2,False,False,False
+24.32,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.61 ,False,True,True,3,False,False,False
+24.53,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.99 ,False,True,True,2,False,False,False
+24.86,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,34.12 ,True,False,False,5,True,False,False
+24.92,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,40.71 ,True,True,True,5,True,False,False
+24.99,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,29.24 ,True,False,False,4,True,False,False
+25.01,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,34.39 ,True,False,False,9,True,True,False
+25.18,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,30.04 ,True,False,False,4,True,False,False
+25.50,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,30.51 ,True,False,False,9,True,True,False
+25.54,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,35.15 ,True,False,False,5,True,False,False
+26.01,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,27.13 ,True,False,False,7,True,True,False
+26.10,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,27.59 ,False,False,False,1,False,False,False
+26.11,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,30.65 ,True,False,False,6,True,False,False
+26.31,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,30.65 ,True,False,False,8,True,True,False
+26.32,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,31.01 ,False,False,False,1,False,False,False
+26.66,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,31.14 ,True,False,False,4,True,False,False
+26.98,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,27.81 ,False,False,False,1,False,False,False
+27.11,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,27.81 ,True,False,False,4,True,False,False
+27.12,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,28.62 ,True,False,False,9,True,True,False
+27.24,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,35.17 ,True,False,False,5,True,False,False
+27.37,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,35.58 ,False,False,False,1,False,False,False
+27.55,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,35.64 ,True,False,False,4,True,False,False
+27.60,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,31.17 ,True,False,False,7,True,True,False
+27.60,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,31.19 ,True,False,False,8,True,True,False
+27.66,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,28.74 ,False,False,False,3,False,False,False
+27.77,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,31.24 ,True,False,False,6,True,False,False
+27.80,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,35.72 ,True,False,False,5,True,False,False
+27.91,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,35.83 ,True,False,False,5,True,False,False
+27.94,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,28.93 ,True,False,False,6,True,False,False
+28.02,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,36.72 ,True,False,False,9,True,True,False
+28.07,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,28.94 ,True,False,False,5,True,False,False
+28.20,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,29.00 ,True,False,False,8,True,True,False
+28.30,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,29.64 ,True,False,False,4,True,False,False
+28.34,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,36.87 ,False,False,False,2,False,False,False
+28.43,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,36.87 ,False,False,False,1,False,False,False
+28.44,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,36.90 ,True,False,False,5,True,False,False
+28.49,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,38.89 ,False,True,False,1,False,False,False
+28.50,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,30.43 ,True,False,False,7,True,True,False
+28.79,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,31.31 ,True,False,False,4,True,False,False
+28.94,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.04 ,True,True,True,4,True,False,False
+28.97,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,31.49 ,False,False,False,2,False,False,False
+29.09,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.04 ,True,True,True,5,True,False,False
+29.09,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,31.39 ,True,False,False,7,True,True,False
+29.11,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.10 ,False,True,True,3,False,False,False
+29.18,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.68 ,True,True,True,8,True,True,False
+29.52,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,31.51 ,True,False,False,5,True,False,False
+29.53,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.68 ,True,True,True,7,True,True,False
+29.58,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,31.52 ,True,False,False,7,True,True,False
+29.64,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,31.83 ,False,False,False,2,False,False,False
+29.64,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,32.19 ,True,False,False,9,True,True,False
+29.94,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,33.30 ,True,False,False,4,True,False,False
+30.01,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,32.98 ,True,False,False,8,True,True,False
+30.55,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,33.43 ,True,False,False,8,True,True,False
+30.78,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.96 ,True,True,True,7,True,True,False
+30.97,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,40.17 ,True,True,True,8,True,True,False
+31.00,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,33.81 ,True,False,False,4,True,False,False
+31.07,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,26.76 ,True,False,False,7,True,True,False
+31.10,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,33.71 ,True,False,False,6,True,False,False
+31.11,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,27.16 ,True,False,False,7,True,True,False
+31.45,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,33.76 ,True,False,False,4,True,False,False
+31.49,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,33.87 ,True,False,False,4,True,False,False
+31.53,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,33.77 ,True,False,False,4,True,False,False
+31.58,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,34.00 ,True,False,False,7,True,True,False
+31.75,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,33.98 ,True,False,False,6,True,False,False
+31.81,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,27.57 ,False,False,False,2,False,False,False
+31.84,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,34.06 ,True,False,False,9,True,True,False
+32.02,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,34.05 ,True,False,False,8,True,True,False
+32.09,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,34.09 ,True,False,False,5,True,False,False
+32.09,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,34.07 ,True,False,False,5,True,False,False
+32.23,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,34.15 ,False,False,False,3,False,False,False
+32.40,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,34.52 ,True,False,False,6,True,False,False
+32.64,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,34.71 ,True,False,False,9,True,True,False
+32.65,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,27.58 ,True,False,False,6,True,False,False
+32.65,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,34.23 ,False,False,False,3,False,False,False
+32.66,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,27.96 ,False,False,False,1,False,False,False
+32.78,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,34.73 ,False,False,False,1,False,False,False
+32.84,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,28.04 ,True,False,False,4,True,False,False
+32.84,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,35.86 ,False,False,False,2,False,False,False
+32.99,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,28.11 ,True,False,False,9,True,True,False
+33.12,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,34.39 ,True,False,False,7,True,True,False
+33.17,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,28.30 ,True,False,False,5,True,False,False
+33.20,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,34.86 ,True,False,False,9,True,True,False
+33.29,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,28.47 ,True,False,False,6,True,False,False
+33.45,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,36.17 ,False,False,False,2,False,False,False
+33.47,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,28.86 ,True,False,False,6,True,False,False
+33.53,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,36.87 ,True,False,False,9,True,True,False
+33.65,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,37.00 ,False,False,False,1,False,False,False
+33.68,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,35.40 ,False,False,False,1,False,False,False
+33.73,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,37.03 ,False,False,False,1,False,False,False
+33.88,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,38.31 ,True,True,False,9,True,True,False
+33.95,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,29.23 ,True,False,False,9,True,True,False
+34.27,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,37.29 ,True,False,False,9,True,True,False
+34.29,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,29.50 ,True,False,False,8,True,True,False
+34.51,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,29.51 ,True,False,False,7,True,True,False
+34.56,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,30.03 ,True,False,False,5,True,False,False
+34.71,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,38.69 ,True,True,False,9,True,True,False
+34.80,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,30.33 ,True,False,False,5,True,False,False
+34.95,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,31.02 ,True,False,False,4,True,False,False
+35.09,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,38.90 ,True,True,False,8,True,True,False
+35.12,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,37.38 ,True,False,False,7,True,True,False
+35.56,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,37.55 ,True,False,False,7,True,True,False
+35.64,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.36 ,True,True,True,6,True,False,False
+35.73,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,31.04 ,False,False,False,2,False,False,False
+35.85,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,31.08 ,True,False,False,9,True,True,False
+36.09,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,40.39 ,True,True,True,7,True,True,False
+36.35,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,38.08 ,True,True,False,4,True,False,False
+36.45,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,31.61 ,True,False,False,8,True,True,False
+36.69,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,32.48 ,True,False,False,7,True,True,False
+36.70,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,38.42 ,True,True,False,5,True,False,False
+36.86,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,26.81 ,False,False,False,1,False,False,False
+37.00,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,38.53 ,True,True,False,5,True,False,False
+37.13,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.26 ,True,True,True,7,True,True,False
+37.31,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,27.51 ,True,False,False,6,True,False,False
+37.53,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.26 ,True,True,True,4,True,False,False
+37.55,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.80 ,False,True,True,3,False,False,False
+37.56,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,32.49 ,False,False,False,3,False,False,False
+37.56,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,27.51 ,True,False,False,9,True,True,False
+37.58,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,28.12 ,False,False,False,1,False,False,False
+37.59,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,33.31 ,True,False,False,4,True,False,False
+37.85,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.91 ,True,True,True,6,True,False,False
+37.85,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,28.21 ,False,False,False,2,False,False,False
+38.06,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,28.25 ,False,False,False,1,False,False,False
+38.14,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,28.36 ,False,False,False,1,False,False,False
+38.19,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,33.53 ,True,False,False,8,True,True,False
+38.33,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,33.74 ,True,False,False,8,True,True,False
+38.43,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,28.49 ,False,False,False,2,False,False,False
+38.54,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,40.03 ,True,True,True,7,True,True,False
+38.55,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,29.90 ,True,False,False,8,True,True,False
+38.73,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,26.17 ,True,False,False,6,True,False,False
+39.02,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,34.72 ,False,False,False,2,False,False,False
+39.14,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,26.36 ,True,False,False,5,True,False,False
+39.34,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,30.68 ,True,False,False,8,True,True,False
+39.46,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,26.44 ,False,False,False,3,False,False,False
+39.52,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,26.52 ,False,False,False,3,False,False,False
+39.55,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,34.73 ,False,False,False,1,False,False,False
+39.84,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,36.50 ,True,False,False,7,True,True,False
+39.84,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,26.57 ,True,False,False,9,True,True,False
+39.90,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,30.27 ,False,False,False,2,False,False,False
+39.92,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,31.07 ,True,False,False,4,True,False,False
+40.13,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,31.13 ,True,False,False,7,True,True,False
+40.19,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,38.89 ,False,True,False,2,False,False,False
+40.41,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,33.94 ,True,False,False,5,True,False,False
+41.15,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.52 ,False,True,True,3,False,False,False
+41.46,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,34.30 ,True,False,False,8,True,True,False
+41.60,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.69 ,False,True,True,1,False,False,False
+41.60,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,34.50 ,True,False,False,5,True,False,False
+41.71,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,35.01 ,True,False,False,5,True,False,False
+41.71,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,30.29 ,True,False,False,6,True,False,False
+41.86,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,40.15 ,True,True,True,6,True,False,False
+42.24,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,26.66 ,True,False,False,5,True,False,False
+42.28,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,26.98 ,False,False,False,2,False,False,False
+42.29,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,30.87 ,False,False,False,2,False,False,False
+42.76,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,30.59 ,True,False,False,6,True,False,False
+42.89,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,30.95 ,True,False,False,4,True,False,False
+43.02,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,30.99 ,True,False,False,5,True,False,False
+43.05,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,32.64 ,True,False,False,9,True,True,False
+43.13,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,35.11 ,True,False,False,6,True,False,False
+43.24,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,35.93 ,True,False,False,5,True,False,False
+43.75,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,36.25 ,True,False,False,7,True,True,False
+43.96,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,30.73 ,True,False,False,5,True,False,False
+43.96,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,36.37 ,True,False,False,6,True,False,False
+44.14,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,36.46 ,True,False,False,4,True,False,False
+44.17,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,30.81 ,True,False,False,8,True,True,False
+44.37,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,33.03 ,True,False,False,7,True,True,False
+44.50,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,31.12 ,True,False,False,9,True,True,False
+44.65,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,36.54 ,False,False,False,2,False,False,False
+44.83,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,31.15 ,False,False,False,3,False,False,False
+44.85,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,33.06 ,True,False,False,9,True,True,False
+44.97,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,36.62 ,True,False,False,8,True,True,False
+45.10,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,33.10 ,False,False,False,1,False,False,False
+45.16,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,33.38 ,True,False,False,8,True,True,False
+45.19,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,36.65 ,False,False,False,1,False,False,False
+45.24,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,36.73 ,False,False,False,1,False,False,False
+45.41,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,37.26 ,False,False,False,1,False,False,False
+45.56,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,33.54 ,True,False,False,4,True,False,False
+45.71,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,33.65 ,False,False,False,2,False,False,False
+45.81,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,34.59 ,False,False,False,3,False,False,False
+45.82,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,37.27 ,True,False,False,7,True,True,False
+45.83,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,37.36 ,True,False,False,9,True,True,False
+46.18,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,37.45 ,True,False,False,8,True,True,False
+46.24,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,37.65 ,True,False,False,8,True,True,False
+46.90,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,34.67 ,True,False,False,7,True,True,False
+46.94,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,34.67 ,True,False,False,7,True,True,False
+46.95,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,34.74 ,True,False,False,5,True,False,False
+47.00,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,32.66 ,True,False,False,7,True,True,False
+47.20,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,34.76 ,True,False,False,6,True,False,False
+47.33,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,38.26 ,True,True,False,5,True,False,False
+47.41,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,35.00 ,True,False,False,7,True,True,False
+47.62,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,38.85 ,True,True,False,8,True,True,False
+47.79,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,32.97 ,True,False,False,6,True,False,False
+47.87,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,35.00 ,True,False,False,7,True,True,False
+47.87,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,35.49 ,True,False,False,4,True,False,False
+47.93,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,38.96 ,False,True,False,2,False,False,False
+48.17,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,35.50 ,True,False,False,5,True,False,False
+48.17,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,36.92 ,False,False,False,2,False,False,False
+48.23,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.02 ,True,True,True,8,True,True,False
+48.29,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,33.13 ,False,False,False,2,False,False,False
+48.35,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,33.97 ,False,False,False,2,False,False,False
+48.74,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,36.94 ,True,False,False,4,True,False,False
+48.79,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,37.05 ,False,False,False,2,False,False,False
+48.96,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,34.00 ,True,False,False,6,True,False,False
+48.99,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,37.39 ,True,False,False,5,True,False,False
+49.01,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.05 ,True,True,True,9,True,True,False
+49.05,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,34.00 ,False,False,False,2,False,False,False
+49.05,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,34.04 ,True,False,False,7,True,True,False
+49.15,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,34.11 ,True,False,False,8,True,True,False
+49.17,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,35.03 ,True,False,False,8,True,True,False
+49.20,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.51 ,True,True,True,7,True,True,False
+49.47,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.54 ,False,True,True,1,False,False,False
+49.49,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,35.08 ,True,False,False,6,True,False,False
+49.50,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,37.47 ,False,False,False,2,False,False,False
+49.53,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,35.31 ,True,False,False,7,True,True,False
+49.58,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.54 ,True,True,True,6,True,False,False
+49.58,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,38.17 ,True,True,False,6,True,False,False
+49.67,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.67 ,False,True,True,2,False,False,False
+49.95,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.68 ,False,True,True,3,False,False,False
+49.96,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.79 ,True,True,True,7,True,True,False
+50.10,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,38.17 ,False,True,False,2,False,False,False
+50.13,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,38.28 ,False,True,False,2,False,False,False
+50.19,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,36.15 ,False,False,False,2,False,False,False
+50.20,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,38.54 ,False,True,False,1,False,False,False
+50.51,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.83 ,True,True,True,9,True,True,False
+50.54,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,41.69 ,True,True,True,8,True,True,False
+50.64,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,36.21 ,False,False,False,3,False,False,False
+50.75,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,36.86 ,True,False,False,6,True,False,False
+50.89,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,38.54 ,False,True,False,2,False,False,False
+51.28,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,38.55 ,True,True,False,6,True,False,False
+51.31,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,25.45 ,True,False,False,4,True,False,False
+51.45,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,38.72 ,True,True,False,8,True,True,False
+51.70,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.09 ,True,True,True,4,True,False,False
+51.99,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,37.00 ,False,False,False,1,False,False,False
+52.02,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.63 ,True,True,True,5,True,False,False
+52.21,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,37.32 ,True,False,False,9,True,True,False
+52.27,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.65 ,False,True,True,1,False,False,False
+52.30,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.82 ,False,True,True,2,False,False,False
+52.36,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.86 ,False,True,True,1,False,False,False
+
+52.80,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.93 ,True,True,True,8,True,True,False
+52.89,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,40.26 ,True,True,True,6,True,False,False
+53.01,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,25.56 ,False,False,False,2,False,False,False
+53.24,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,37.35 ,True,False,False,4,True,False,False
+53.26,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,37.50 ,True,False,False,6,True,False,False
+53.27,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,26.83 ,True,False,False,8,True,True,False
+53.41,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,27.47 ,True,False,False,9,True,True,False
+53.48,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,38.01 ,True,True,False,8,True,True,False
+53.53,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,25.88 ,True,False,False,4,True,False,False
+53.83,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,27.73 ,False,False,False,3,False,False,False
+53.87,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,38.12 ,True,True,False,8,True,True,False
+53.90,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,26.03 ,True,False,False,4,True,False,False
+54.07,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,38.96 ,False,True,False,1,False,False,False
+54.09,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,26.44 ,True,False,False,9,True,True,False
+54.37,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,26.48 ,True,False,False,9,True,True,False
+54.41,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,27.74 ,True,False,False,6,True,False,False
+54.43,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,28.07 ,True,False,False,7,True,True,False
+54.52,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,26.53 ,True,False,False,7,True,True,False
+54.54,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,26.78 ,False,False,False,3,False,False,False
+54.64,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,28.08 ,True,False,False,9,True,True,False
+54.68,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,28.08 ,True,False,False,5,True,False,False
+54.72,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.16 ,True,True,True,6,True,False,False
+54.72,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,26.79 ,True,False,False,6,True,False,False
+54.76,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,28.11 ,True,False,False,9,True,True,False
+54.76,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,26.98 ,True,False,False,5,True,False,False
+54.82,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,28.84 ,True,False,False,8,True,True,False
+54.86,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,39.69 ,True,True,True,6,True,False,False
+55.22,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,27.44 ,True,False,False,7,True,True,False
+55.59,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,28.98 ,True,False,False,4,True,False,False
+55.76,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,27.55 ,False,False,False,2,False,False,False
+55.76,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,40.28 ,True,True,True,8,True,True,False
+56.02,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,29.41 ,False,False,False,3,False,False,False
+56.37,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,26.21 ,True,False,False,4,True,False,False
+56.47,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,29.43 ,False,False,False,3,False,False,False
+56.51,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,28.08 ,True,False,False,9,True,True,False
+57.02,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,29.45 ,True,False,False,4,True,False,False
+57.03,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,29.48 ,True,False,False,4,True,False,False
+57.04,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,29.63 ,False,False,False,1,False,False,False
+57.24,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,29.79 ,True,False,False,4,True,False,False
+57.28,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,26.30 ,True,False,False,5,True,False,False
+57.31,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,26.31 ,False,False,False,3,False,False,False
+57.48,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,29.85 ,True,False,False,5,True,False,False
+57.51,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,30.70 ,False,False,False,3,False,False,False
+57.57,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,26.51 ,True,False,False,6,True,False,False
+57.78,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,26.51 ,True,False,False,5,True,False,False
+58.15,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,28.35 ,False,False,False,2,False,False,False
+58.23,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,26.53 ,False,False,False,2,False,False,False
+58.31,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,26.86 ,False,False,False,2,False,False,False
+58.42,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,28.55 ,False,False,False,3,False,False,False
+58.75,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,28.88 ,False,False,False,3,False,False,False
+58.93,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,26.88 ,False,False,False,3,False,False,False
+58.96,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,30.72 ,True,False,False,9,True,True,False
+58.96,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,28.88 ,True,False,False,9,True,True,False
+58.97,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,30.72 ,False,False,False,2,False,False,False
+58.97,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,27.45 ,False,False,False,3,False,False,False
+58.98,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,28.89 ,True,False,False,8,True,True,False
+59.02,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,32.58 ,True,False,False,6,True,False,False
+59.08,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,28.94 ,True,False,False,6,True,False,False
+59.20,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,29.23 ,False,False,False,1,False,False,False
+59.26,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,28.00 ,True,False,False,4,True,False,False
+59.34,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,33.22 ,False,False,False,1,False,False,False
+59.53,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,28.01 ,True,False,False,6,True,False,False
+59.66,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,28.05 ,False,False,False,1,False,False,False
+59.69,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,28.66 ,True,False,False,9,True,True,False
+59.75,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,33.22 ,False,False,False,2,False,False,False
+59.77,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,29.77 ,True,False,False,7,True,True,False
+59.80,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,33.61 ,True,False,False,7,True,True,False
+59.97,Done,None,None,None,Done,None,None,None,Done,None,None,None,Done,None,None,None,28.77 ,False,False,False,1,False,False,False
