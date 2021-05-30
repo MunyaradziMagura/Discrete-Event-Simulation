@@ -60,7 +60,6 @@ def pipe_generator(env, start_temperature, start_vibration, limit_temperature, l
         sensor_id += 1
 
 
-
 # this function is the waters journey through the pipe 
 def sensor_generator(env, sensor_id,start_temperature,highest_temp, start_vibration, limit_temperature, limit_vibration, sensor_interval_time, sensor, warning_temp,warning_vib):
 # def sensor_generator(env, start_temperature, highest_temp, start_vibration, limit_temperature, limit_vibration, sensor_interval_time, sensor, warning_temp):
@@ -196,8 +195,6 @@ def sensor_generator(env, sensor_id,start_temperature,highest_temp, start_vibrat
             yield env.timeout(interarrival,highest_temp)
 
 
-
-
 # notifications need to be in diffenrt tables
 # data can be generated in sec or min
 
@@ -205,21 +202,21 @@ def sensor_generator(env, sensor_id,start_temperature,highest_temp, start_vibrat
 env = simpy.Environment()
 
 sensor = simpy.Resource(env, capacity=1)
-
+# starting tempreture & vibration
 start_temperature = 24
+start_vibration = 10
+# pipe limit for tempreture and vibration
+limit_temperature = 40
+limit_vibration = 10
+# max time each sensor can run. will be timed by three for the number of sensors
+sensor_interval_time = 20
 # [warning, alerm, emergency]
 warning_temp = [37, 38, 39]
 warning_vib = [3, 6, 9]
-start_vibration = 10
-limit_temperature = 40
-limit_vibration = 1
-sensor_interval_time = 20
-
-# store the last temp of a sensor
 
 env.process(pipe_generator(env, start_temperature, start_vibration, limit_temperature, limit_vibration, sensor_interval_time, sensor, warning_temp,warning_vib,rows))
-
-env.run(until=60)
+# run the simulation
+env.run(until=sensor_interval_time * 3)
 
 
 # writing to csv file 
