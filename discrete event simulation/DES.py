@@ -3,8 +3,6 @@ import random
 import secrets
 import csv 
 
-
-    
 # field names 
               # sensor 1
 fields = ['time','sensor_one_temp','sensor_one_warning','sensor_one_alarm','sensor_one_emergency',
@@ -21,7 +19,7 @@ rows = []
 # name of csv file 
 filename = "sensor_data.csv"
 
-
+# write the id to an external text file for storage and dataloss prevention
 def identification(id):
     with open('id.txt', 'w') as f:
         f.write(f"{id}")
