@@ -1,57 +1,94 @@
 import simpy
 import random
 import secrets
+import csv 
+
+
+    
+# field names 
+
+fields = ['time','sensor_one_temp','sensor_one_warning','sensor_one_alarm','sensor_one_emergency',
+            'sensor_two_temp','sensor_two_warning','sensor_two_alarm','sensor_two_emergency',
+            'sensor_three_temp','sensor_three_warning','sensor_three_alarm','sensor_three_emergency'
+            
+            ,'sensor_one_vib','sensor_one_warning_vib','sensor_one_alarm_vib','sensor_one_emergency_vib',
+            'sensor_two_temp_vib','sensor_two_warning_vib','sensor_two_alarm_vib','sensor_two_emergency_vib'
+            'sensor_three_temp_vib','sensor_three_warning_vib','sensor_three_alarm_vib','sensor_three_emergency_vib']
+# data rows of csv file 
+rows = [] 
+    
+# name of csv file 
+filename = "sensor_data.csv"
+
+# for testing purpose, delete it pls
+# temp_id = 0
+# def identification(id):
+#     return id
+
+def identification(id):
+    with open('id.txt', 'w') as f:
+        f.write(f"{id}")
+    return id
 
 #  generate the pipe 
-def pipe_generator(env, start_temperature, start_vibration, limit_temperature, limit_vibration, sensor_interval_time, sensor, warning_temp):
+def pipe_generator(env, start_temperature, start_vibration, limit_temperature, limit_vibration, sensor_interval_time, sensor, warning_temp, rows):
+    
     # which sensor is being simulated
     sensor_id = 0
     highest_temp = 0
+
+    print("sensor1  | sensor2 | sensor3")
+
     # because there are only three sensors
     while True and sensor_id < 3:
-        
+        # set id
+        identification(sensor_id)
+        # print(f"\n\n\n\n\n\n\n\n{identification(sensor_id)}\n\n\n\n\n\n\n\n\n\n\n")
+       
+        csv_data = []
         # add the last temp to the new 
         if highest_temp > 0:
             start_temperature += highest_temp - start_temperature
         #  create an instance of the water within the pipe
         water = sensor_generator(env, sensor_id,start_temperature,highest_temp, start_vibration, limit_temperature, limit_vibration, sensor_interval_time, sensor, warning_temp)
+        # water = sensor_generator(env,start_temperature,highest_temp, start_vibration, limit_temperature, limit_vibration, sensor_interval_time, sensor, warning_temp)
 
         # run the water instance for this sensor i.e. simulate water running though this section of the pipe 
         env.process(water)
-
+        
         # time until the next sensor is reached by water 
         time = random.expovariate(1.0 / sensor_interval_time)
-
         # create a new sensor when time has passed
         yield env.timeout(time, highest_temp)
-
+        rows.append(csv_data)
+        
         # incriment the sensors by 1
         sensor_id += 1
 
 
+
 # this function is the waters journey through the pipe 
 def sensor_generator(env, sensor_id,start_temperature,highest_temp, start_vibration, limit_temperature, limit_vibration, sensor_interval_time, sensor, warning_temp):
-        # time left for the sensor
-    sensor_time_left = env.active_process   
-    print(f"distance travled is {sensor_time_left}")
-    if sensor_id == 3:
-        print("HELLO WORLD")
-        print(f"distance travled is {sensor_time_left}")
+# def sensor_generator(env, start_temperature, highest_temp, start_vibration, limit_temperature, limit_vibration, sensor_interval_time, sensor, warning_temp):
+    
     # record the time the water starts changing tempreture at this sensor
     current_time = env.now
-    print("Sensor:",sensor_id," started changing tempretures at",current_time," its current tempreture is ",start_temperature)
+    # print("------Sensor:",sensor_id," started changing tempretures at", current_time," its current tempreture is ", start_temperature)
+    
     # temperature 
     temperature = start_temperature
-    # vibration 
-
+   
+    # print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@   ",sensor_id)
+    new_id = int(open("id.txt", "r").read())
     # request the sensor data
     with sensor.request() as req:
+        # print("sensor_id ", sensor_id)
         # stop if no sensor is found 
-        yield req
+        # yield req
         con_time = random.expovariate(1.0 / sensor_interval_time)
         
         while True:
-            
+            new_id = int(open("id.txt", "r").read())
             # random number generator
             interarrival = random.expovariate(sensor_id + 1)
             # simulate vibration spikes 
@@ -61,28 +98,44 @@ def sensor_generator(env, sensor_id,start_temperature,highest_temp, start_vibrat
             while vibration == 0:
                 vibration = secrets.randbelow(start_vibration)
 
-            #  send warning if the tempreture is too hot or vibration is too much
-            if temperature >= warning_temp[1] and temperature < warning_temp[2]: 
-                print("WARNING PIPE IS WARMING UP")
-            if temperature >= warning_temp[2]: 
-                print("COLD-RED PIPE IS HOT!!!")
-            if vibration > limit_vibration:
-                print(f"WARNING VIBRATION LIMIT REACHED. PIPE INTEGRETTY AT RISK.VIBRATION: {vibration}")
-            # if the temp reaches the pipe limit then we simulate the user manually lowering it
+            # catch temperature alerts
             if temperature > limit_temperature:
                 print("pipe temperture limit reached")
                 temperature -= random.expovariate(1.0/interarrival) + (highest_temp / 3)
             else:
                 temperature += random.expovariate(1.0/interarrival)
+            
+            # catch vibration alerts
 
             # get the final tempreture 
             highest_temp = temperature
+            print(f"current_time {env.now:5.2f} |" ,end="")
+            if new_id == 0:
+                print( f' temp changed to {temperature:5.2f} degree/s Celsius at {env.now:5.2f} min/s || vibrated by {vibration} cubic meters |', end="")
+                # time, warnings
+                sensor_one_data = [f' temp changed to {temperature:5.2f} ',]
+                print("N/A   |", end="")  # sensor id = 1
+                print("N/A")  # sensor id = 2
+            elif new_id == 1:
+                print("N/A   |", end="")  # sensor id = 0
+                print( f' temp changed to {temperature:5.2f} degree/s Celsius at {env.now:5.2f} min/s || vibrated by {vibration} cubic meters |', end="")
+                print("N/A   |")  # sensor id = 2
+            elif new_id == 2:
+                print("N/A   |", end="")  # sensor id = 0
+                print("N/A   |", end="")  # sensor id = 1
+                print( f' temp changed to {temperature:5.2f} degree/s Celsius at {env.now:5.2f} min/s || vibrated by {vibration} cubic meters |')  
             
+            
+            # to make things interesting, we add some printouts
+            # print( f' temp changed to {temperature:5.2f} degree/s Celsius at {env.now:5.2f} min/s || vibrated by {vibration} cubic meters')
+            # print("sensor_id ", sensor_id)
+
+            
+ 
             # instead of yielding the arrival time, yield a Timeout Event
             yield env.timeout(interarrival,highest_temp)
 
-            # to make things interesting, we add some printouts
-            print( f'temp changed to {temperature:5.2f} degree/s Celsius at {env.now:5.2f} min/s || vibrated by {vibration} cubic meters')
+
 
 
 # notifications need to be in diffenrt tables
@@ -94,13 +147,25 @@ env = simpy.Environment()
 sensor = simpy.Resource(env, capacity=1)
 
 start_temperature = 24
-# [good, warning, cold-red]
-warning_temp = [start_temperature, 38, 39]
+# [warning, alerm, emergency]
+warning_temp = [37, 38, 39]
 start_vibration = 10
 limit_temperature = 40
 limit_vibration = 1
 sensor_interval_time = 20
 
-env.process(pipe_generator(env, start_temperature, start_vibration, limit_temperature, limit_vibration, sensor_interval_time, sensor, warning_temp))
+# store the last temp of a sensor
+
+env.process(pipe_generator(env, start_temperature, start_vibration, limit_temperature, limit_vibration, sensor_interval_time, sensor, warning_temp,rows))
 
 env.run(until=60)
+
+
+# writing to csv file 
+with open(filename, 'w') as csvfile: 
+    # creating a csv writer object 
+    csvwriter = csv.writer(csvfile) 
+    # writing the fields 
+    csvwriter.writerow(fields) 
+    # writing the data rows 
+    csvwriter.writerows(rows)

@@ -1,39 +1,34 @@
-# import
+import csv 
+import constants
+print(constants.id)
 
-import simpy
-from random import randint
-print()
-# config
-TALKS_PER_SESSION = 3
-TALK_LENGTH = 30
-BREAK_LENGTH = 15
-ATTENDEES = 3
 
-# process function
-def attendee(env, name, knowledge=0, hunger=0):
-    talks = 0
-    breaks = 0
-    while True:
-        # Visit talks
-        for i in range(TALKS_PER_SESSION):
-            knowledge += randint(0, 3) / (1 + hunger)
-            hunger += randint(1, 4)
-            talks += 1
-            yield env.timeout(TALK_LENGTH)
-
-        print('Attendee %s finished %d talks with knowledge %.2f and hunger %.2f.' % (name, talks, knowledge, hunger))
-
-        # Go to buffet
-        food = randint(3, 12)
-        hunger -= min(food, hunger)
-        breaks += 1
-
-        yield env.timeout(BREAK_LENGTH)
-
-        print('Attendee %s has finished break %d with hunger %.2f' % (name, breaks, hunger))
-
-# setup environment and run simulation
-env = simpy.Environment()
-for i in range(ATTENDEES):
-    env.process(attendee(env, i))
-env.run(until=250)
+# field names 
+fields = ['time','sensor_one_temp','sensor_one_warning','sensor_one_alarm','sensor_one_emergency',
+            'sensor_two_temp','sensor_two_warning','sensor_two_alarm','sensor_two_emergency',
+            'sensor_three_temp','sensor_three_warning','sensor_three_alarm','sensor_three_emergency'
+            
+            ,'sensor_one_vib','sensor_one_warning_vib','sensor_one_alarm_vib','sensor_one_emergency_vib',
+            'sensor_two_temp_vib','sensor_two_warning_vib','sensor_two_alarm_vib','sensor_two_emergency_vib'
+            'sensor_three_temp_vib','sensor_three_warning_vib','sensor_three_alarm_vib','sensor_three_emergency_vib']
+# data rows of csv file 
+rows = [ ['Nikhil', 'COE', '2', '9.0'], 
+         ['Sanchit', 'COE', '2', '9.1'], 
+         ['Aditya', 'IT', '2', '9.3'], 
+         ['Sagar', 'SE', '1', '9.5'], 
+         ['Prateek', 'MCE', '3', '7.8'], 
+         ['Sahil', 'EP', '2', '9.1']] 
+    
+# name of csv file 
+filename = "university_records.csv"
+    
+# writing to csv file 
+with open(filename, 'w') as csvfile: 
+    # creating a csv writer object 
+    csvwriter = csv.writer(csvfile) 
+        
+    # writing the fields 
+    csvwriter.writerow(fields) 
+        
+    # writing the data rows 
+    csvwriter.writerows(rows)
