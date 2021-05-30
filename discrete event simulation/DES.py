@@ -89,19 +89,19 @@ def sensor_generator(env, sensor_id,start_temperature,highest_temp, start_vibrat
             sensor_two_data = [f'{start_temperature}',f'{False}',f'{False}',f'{False}',f'{start_vibration}',f'{False}',f'{False}',f'{False}']
             sensor_three_data = [f'{start_temperature}',f'{False}',f'{False}',f'{False}',f'{start_vibration}',f'{False}',f'{False}',f'{False}']
             #append the data to the csv rows array
-            rows.append(time + sensor_one_data + sensor_two_data + sensor_three_data)
+            rows.append(current_time + sensor_one_data + sensor_two_data + sensor_three_data)
             break;
         case 1:
             sensor_one_data = [f'{start_temperature}',f'{None}',f'{None}',f'{None}',f'{start_vibration}',f'{None}',f'{None}',f'{None}']
             sensor_two_data = [f'{temperature:5.2f} ',f'{vib_warning}',f'{temp_alerm}',f'{temp_emergency}',f'{vibration}',f'{vib_warning}',f'{vib_alerm}',f'{vib_emergency}']
             sensor_three_data = [f'{start_temperature}',f'{False}',f'{False}',f'{False}',f'{start_vibration}',f'{False}',f'{False}',f'{False}']
-            rows.append(time + sensor_one_data + sensor_two_data + sensor_three_data)
+            rows.append(current_time + sensor_one_data + sensor_two_data + sensor_three_data)
             break;
         case 2:
             sensor_one_data = [f'{temperature:5.2f} ',f'{vib_warning}',f'{temp_alerm}',f'{temp_emergency}',f'{vibration}',f'{vib_warning}',f'{vib_alerm}',f'{vib_emergency}']
             sensor_two_data = [f'{start_temperature}',f'{None}',f'{None}',f'{None}',f'{start_vibration}',f'{None}',f'{None}',f'{None}']
             sensor_three_data = [f'{start_temperature}',f'{None}',f'{None}',f'{None}',f'{start_vibration}',f'{None}',f'{None}',f'{None}']
-            rows.append(time + sensor_one_data + sensor_two_data + sensor_three_data)
+            rows.append(current_time + sensor_one_data + sensor_two_data + sensor_three_data)
             break;
     }
     # request the sensor data
