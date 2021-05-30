@@ -1,3 +1,19 @@
 time,sensor_one_temp,sensor_one_warning,sensor_one_alarm,sensor_one_emergency,sensor_one_vib,sensor_one_warning_vib,sensor_one_alarm_vib,sensor_one_emergency_vib,sensor_two_temp,sensor_two_warning,sensor_two_alarm,sensor_two_emergency,sensor_two_temp_vib,sensor_two_warning_vib,sensor_two_alarm_vib,sensor_two_emergency_vib,sensor_three_temp,sensor_three_warning,sensor_three_alarm,sensor_three_emergency,sensor_three_temp_vib,sensor_three_warning_vib,sensor_three_alarm_vib,sensor_three_emergency_vib
+ 0.00,26.34 ,False,False,False,2,False,False,False,24,False,False,False,10,False,False,False,24,False,False,False,10,False,False,False
+ 1.98,26.55 ,True,False,False,8,True,True,False,24,False,False,False,10,False,False,False,24,False,False,False,10,False,False,False
+ 3.11,28.16 ,True,False,False,9,True,True,False,24,False,False,False,10,False,False,False,24,False,False,False,10,False,False,False
+ 4.34,28.22 ,True,False,False,7,True,True,False,24,False,False,False,10,False,False,False,24,False,False,False,10,False,False,False
+ 4.58,28.44 ,False,False,False,2,False,False,False,24,False,False,False,10,False,False,False,24,False,False,False,10,False,False,False
+ 5.15,28.90 ,False,False,False,3,False,False,False,24,False,False,False,10,False,False,False,24,False,False,False,10,False,False,False
+ 6.19,29.21 ,True,False,False,4,True,False,False,24,False,False,False,10,False,False,False,24,False,False,False,10,False,False,False
+ 6.39,29.25 ,True,False,False,8,True,True,False,24,False,False,False,10,False,False,False,24,False,False,False,10,False,False,False
+ 6.78,29.34 ,False,False,False,3,False,False,False,24,False,False,False,10,False,False,False,24,False,False,False,10,False,False,False
+ 7.92,30.26 ,True,False,False,9,True,True,False,24,False,False,False,10,False,False,False,24,False,False,False,10,False,False,False
+ 8.65,30.31 ,False,False,False,2,False,False,False,24,False,False,False,10,False,False,False,24,False,False,False,10,False,False,False
+10.06,33.89 ,False,False,False,1,False,False,False,24,False,False,False,10,False,False,False,24,False,False,False,10,False,False,False
+11.34,33.90 ,True,False,False,9,True,True,False,24,False,False,False,10,False,False,False,24,False,False,False,10,False,False,False
+11.38,34.12 ,True,False,False,4,True,False,False,24,False,False,False,10,False,False,False,24,False,False,False,10,False,False,False
+11.60,34.99 ,False,False,False,3,False,False,False,24,False,False,False,10,False,False,False,24,False,False,False,10,False,False,False
+13.23,35.61 ,True,False,False,4,True,False,False,24,False,False,False,10,False,False,False,24,False,False,False,10,False,False,False
 
 
