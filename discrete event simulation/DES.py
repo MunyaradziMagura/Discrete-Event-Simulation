@@ -80,6 +80,30 @@ def sensor_generator(env, sensor_id,start_temperature,highest_temp, start_vibrat
     temperature = start_temperature
    
     new_id = int(open("id.txt", "r").read())
+
+    # get the staring states of each sensor
+    switch (new_id) {
+        case 0:
+            # set sensor one data
+            sensor_one_data = [f'{temperature:5.2f} ',f'{vib_warning}',f'{temp_alerm}',f'{temp_emergency}',f'{vibration}',f'{vib_warning}',f'{vib_alerm}',f'{vib_emergency}']
+            sensor_two_data = [f'{start_temperature}',f'{False}',f'{False}',f'{False}',f'{start_vibration}',f'{False}',f'{False}',f'{False}']
+            sensor_three_data = [f'{start_temperature}',f'{False}',f'{False}',f'{False}',f'{start_vibration}',f'{False}',f'{False}',f'{False}']
+            #append the data to the csv rows array
+            rows.append(time + sensor_one_data + sensor_two_data + sensor_three_data)
+            break;
+        case 1:
+            sensor_one_data = [f'{start_temperature}',f'{None}',f'{None}',f'{None}',f'{start_vibration}',f'{None}',f'{None}',f'{None}']
+            sensor_two_data = [f'{temperature:5.2f} ',f'{vib_warning}',f'{temp_alerm}',f'{temp_emergency}',f'{vibration}',f'{vib_warning}',f'{vib_alerm}',f'{vib_emergency}']
+            sensor_three_data = [f'{start_temperature}',f'{False}',f'{False}',f'{False}',f'{start_vibration}',f'{False}',f'{False}',f'{False}']
+            rows.append(time + sensor_one_data + sensor_two_data + sensor_three_data)
+            break;
+        case 2:
+            sensor_one_data = [f'{temperature:5.2f} ',f'{vib_warning}',f'{temp_alerm}',f'{temp_emergency}',f'{vibration}',f'{vib_warning}',f'{vib_alerm}',f'{vib_emergency}']
+            sensor_two_data = [f'{start_temperature}',f'{None}',f'{None}',f'{None}',f'{start_vibration}',f'{None}',f'{None}',f'{None}']
+            sensor_three_data = [f'{start_temperature}',f'{None}',f'{None}',f'{None}',f'{start_vibration}',f'{None}',f'{None}',f'{None}']
+            rows.append(time + sensor_one_data + sensor_two_data + sensor_three_data)
+            break;
+    }
     # request the sensor data
     with sensor.request() as req:
         # print("sensor_id ", sensor_id)
@@ -151,24 +175,25 @@ def sensor_generator(env, sensor_id,start_temperature,highest_temp, start_vibrat
                 sensor_one_data = [f'{temperature:5.2f} ',f'{vib_warning}',f'{temp_alerm}',f'{temp_emergency}',f'{vibration}',f'{vib_warning}',f'{vib_alerm}',f'{vib_emergency}']
                 sensor_two_data = [f'{start_temperature}',f'{False}',f'{False}',f'{False}',f'{start_vibration}',f'{False}',f'{False}',f'{False}']
                 sensor_three_data = [f'{start_temperature}',f'{False}',f'{False}',f'{False}',f'{start_vibration}',f'{False}',f'{False}',f'{False}']
-                # [f'{}',f'{}',f'{}',f'{}',f'{}',f'{}',f'{}',f'{}']
+                #append the data to the csv rows array
                 rows.append(time + sensor_one_data + sensor_two_data + sensor_three_data)
             elif new_id == 1:
                 print("N/A   |", end="")  # sensor id = 0
                 print( f' temp changed to {temperature:5.2f} degree/s Celsius at {env.now:5.2f} min/s || vibrated by {vibration} cubic meters |', end="")
                 print("N/A   |")  # sensor id = 2
+                sensor_one_data = [f'{start_temperature}',f'{None}',f'{None}',f'{None}',f'{start_vibration}',f'{None}',f'{None}',f'{None}']
+                sensor_two_data = [f'{temperature:5.2f} ',f'{vib_warning}',f'{temp_alerm}',f'{temp_emergency}',f'{vibration}',f'{vib_warning}',f'{vib_alerm}',f'{vib_emergency}']
+                sensor_three_data = [f'{start_temperature}',f'{False}',f'{False}',f'{False}',f'{start_vibration}',f'{False}',f'{False}',f'{False}']
+                rows.append(time + sensor_one_data + sensor_two_data + sensor_three_data)
             elif new_id == 2:
                 print("N/A   |", end="")  # sensor id = 0
                 print("N/A   |", end="")  # sensor id = 1
                 print( f' temp changed to {temperature:5.2f} degree/s Celsius at {env.now:5.2f} min/s || vibrated by {vibration} cubic meters |')  
-            
-            
-            # to make things interesting, we add some printouts
-            # print( f' temp changed to {temperature:5.2f} degree/s Celsius at {env.now:5.2f} min/s || vibrated by {vibration} cubic meters')
-            # print("sensor_id ", sensor_id)
+                sensor_one_data = [f'{temperature:5.2f} ',f'{vib_warning}',f'{temp_alerm}',f'{temp_emergency}',f'{vibration}',f'{vib_warning}',f'{vib_alerm}',f'{vib_emergency}']
+                sensor_two_data = [f'{start_temperature}',f'{None}',f'{None}',f'{None}',f'{start_vibration}',f'{None}',f'{None}',f'{None}']
+                sensor_three_data = [f'{start_temperature}',f'{None}',f'{None}',f'{None}',f'{start_vibration}',f'{None}',f'{None}',f'{None}']
+                rows.append(time + sensor_one_data + sensor_two_data + sensor_three_data)
 
-            
- 
             # instead of yielding the arrival time, yield a Timeout Event
             yield env.timeout(interarrival,highest_temp)
 
