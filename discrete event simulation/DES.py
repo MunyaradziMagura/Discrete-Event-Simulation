@@ -6,14 +6,15 @@ import csv
 
     
 # field names 
-
+              # sensor 1
 fields = ['time','sensor_one_temp','sensor_one_warning','sensor_one_alarm','sensor_one_emergency',
+            'sensor_one_vib','sensor_one_warning_vib','sensor_one_alarm_vib','sensor_one_emergency_vib',
+            # sensor 2
             'sensor_two_temp','sensor_two_warning','sensor_two_alarm','sensor_two_emergency',
+            'sensor_two_temp_vib','sensor_two_warning_vib','sensor_two_alarm_vib','sensor_two_emergency_vib',
+            # sensor 3 
             'sensor_three_temp','sensor_three_warning','sensor_three_alarm','sensor_three_emergency'
-            
-            ,'sensor_one_vib','sensor_one_warning_vib','sensor_one_alarm_vib','sensor_one_emergency_vib',
-            'sensor_two_temp_vib','sensor_two_warning_vib','sensor_two_alarm_vib','sensor_two_emergency_vib'
-            'sensor_three_temp_vib','sensor_three_warning_vib','sensor_three_alarm_vib','sensor_three_emergency_vib']
+            ,'sensor_three_temp_vib','sensor_three_warning_vib','sensor_three_alarm_vib','sensor_three_emergency_vib']
 # data rows of csv file 
 rows = [] 
     
@@ -31,7 +32,7 @@ def identification(id):
     return id
 
 #  generate the pipe 
-def pipe_generator(env, start_temperature, start_vibration, limit_temperature, limit_vibration, sensor_interval_time, sensor, warning_temp, rows):
+def pipe_generator(env, start_temperature, start_vibration, limit_temperature, limit_vibration, sensor_interval_time, sensor, warning_temp,warning_vib,rows):
     
     # which sensor is being simulated
     sensor_id = 0
@@ -50,7 +51,7 @@ def pipe_generator(env, start_temperature, start_vibration, limit_temperature, l
         if highest_temp > 0:
             start_temperature += highest_temp - start_temperature
         #  create an instance of the water within the pipe
-        water = sensor_generator(env, sensor_id,start_temperature,highest_temp, start_vibration, limit_temperature, limit_vibration, sensor_interval_time, sensor, warning_temp)
+        water = sensor_generator(env, sensor_id,start_temperature,highest_temp, start_vibration, limit_temperature, limit_vibration, sensor_interval_time, sensor, warning_temp,warning_vib)
         # water = sensor_generator(env,start_temperature,highest_temp, start_vibration, limit_temperature, limit_vibration, sensor_interval_time, sensor, warning_temp)
 
         # run the water instance for this sensor i.e. simulate water running though this section of the pipe 
@@ -68,7 +69,7 @@ def pipe_generator(env, start_temperature, start_vibration, limit_temperature, l
 
 
 # this function is the waters journey through the pipe 
-def sensor_generator(env, sensor_id,start_temperature,highest_temp, start_vibration, limit_temperature, limit_vibration, sensor_interval_time, sensor, warning_temp):
+def sensor_generator(env, sensor_id,start_temperature,highest_temp, start_vibration, limit_temperature, limit_vibration, sensor_interval_time, sensor, warning_temp,warning_vib):
 # def sensor_generator(env, start_temperature, highest_temp, start_vibration, limit_temperature, limit_vibration, sensor_interval_time, sensor, warning_temp):
     
     # record the time the water starts changing tempreture at this sensor
@@ -88,9 +89,21 @@ def sensor_generator(env, sensor_id,start_temperature,highest_temp, start_vibrat
         con_time = random.expovariate(1.0 / sensor_interval_time)
         
         while True:
+            # temperture alert conditions
+            temp_warning = False
+            temp_alerm = False
+            temp_emergency = False
+
+            # vibration alert conditions
+            vib_warning = False
+            vib_alerm = False
+            vib_emergency = False
+
+            # ensure the new id remains constant
             new_id = int(open("id.txt", "r").read())
+
             # random number generator
-            interarrival = random.expovariate(sensor_id + 1)
+            interarrival = random.expovariate(new_id + 1)
             # simulate vibration spikes 
             vibration = secrets.randbelow(start_vibration)
             
@@ -98,22 +111,43 @@ def sensor_generator(env, sensor_id,start_temperature,highest_temp, start_vibrat
             while vibration == 0:
                 vibration = secrets.randbelow(start_vibration)
 
-            # catch temperature alerts
+            # limit temperture from running away
             if temperature > limit_temperature:
                 print("pipe temperture limit reached")
                 temperature -= random.expovariate(1.0/interarrival) + (highest_temp / 3)
             else:
                 temperature += random.expovariate(1.0/interarrival)
             
+            # [warning, alerm, emergency]
+
             # catch vibration alerts
+            if temperature > warning_temp[0]:
+                temp_warning = True
+                if temperature > warning_temp[1]:
+                    temp_alerm = True
+                    if temperature > warning_temp[2]:
+                        temp_emergency = True
+            
+            # catch vibration alerts
+            if vibration > warning_vib[0]:
+                vib_warning = True
+                if vibration > warning_vib[1]:
+                    vib_alerm = True
+                    if vibration > warning_vib[2]:
+                        vib_emergency = True
 
             # get the final tempreture 
             highest_temp = temperature
+
+            # get current time into an array
             print(f"current_time {env.now:5.2f} |" ,end="")
+            time = [f"current_time {env.now:5.2f}"]
             if new_id == 0:
                 print( f' temp changed to {temperature:5.2f} degree/s Celsius at {env.now:5.2f} min/s || vibrated by {vibration} cubic meters |', end="")
                 # time, warnings
-                sensor_one_data = [f' temp changed to {temperature:5.2f} ',]
+                # set sensor one data
+                sensor_one_data = [f'{temperature:5.2f} ',f'{vib_warning}',f'{temp_alerm}',f'{temp_emergency}',f'{vibration}',f'{vib_warning}',f'{vib_alerm}',f'{vib_emergency}']
+                # [f'{}',f'{}',f'{}',f'{}',f'{}',f'{}',]
                 print("N/A   |", end="")  # sensor id = 1
                 print("N/A")  # sensor id = 2
             elif new_id == 1:
@@ -149,6 +183,7 @@ sensor = simpy.Resource(env, capacity=1)
 start_temperature = 24
 # [warning, alerm, emergency]
 warning_temp = [37, 38, 39]
+warning_vib = [3, 6, 9]
 start_vibration = 10
 limit_temperature = 40
 limit_vibration = 1
@@ -156,7 +191,7 @@ sensor_interval_time = 20
 
 # store the last temp of a sensor
 
-env.process(pipe_generator(env, start_temperature, start_vibration, limit_temperature, limit_vibration, sensor_interval_time, sensor, warning_temp,rows))
+env.process(pipe_generator(env, start_temperature, start_vibration, limit_temperature, limit_vibration, sensor_interval_time, sensor, warning_temp,warning_vib,rows))
 
 env.run(until=60)
 
