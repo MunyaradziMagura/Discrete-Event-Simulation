@@ -34,7 +34,7 @@ def get_start_vibration():
 def get_limit_vibration():
     return float(array[3])
 
-def get_teat_time():
+def get_test_time():
     return float(array[4])
 
 def get_sensor_temp_warning():

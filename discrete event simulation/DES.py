@@ -217,7 +217,7 @@ start_vibration = int(files.get_start_vibration())
 limit_temperature = int(files.get_limit_temperature())
 limit_vibration = int(files.get_limit_vibration())
 # max time each sensor can run. will be timed by three for the number of sensors
-sensor_interval_time = int(files.get_teat_time())
+sensor_interval_time = int(files.get_test_time())
 # [warning, alerm, emergency]
 warning_temp = [files.get_sensor_temp_warning(), files.get_sensor_temp_alart(), files.get_sensor_temp_emergency()]
 warning_vib = [files.get_sensor_vib_warning(), files.get_sensor_vib_alart(), files.get_sensor_vib_emergency()]
