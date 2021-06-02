@@ -10,6 +10,7 @@ def get_text_value(txt_name):
     return value
 
 def clean_csv(name):
-    import pandas as pd
+    #  read the csv file
     df = pd.read_csv(f'{name}')
+    # remove all empty rows where index is false 
     df.to_csv(f'{name}', index=False)
