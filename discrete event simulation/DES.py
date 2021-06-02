@@ -211,16 +211,16 @@ env = simpy.Environment()
 
 sensor = simpy.Resource(env, capacity=1)
 # starting tempreture & vibration
-start_temperature = 24
-start_vibration = 10
+start_temperature = int(files.get_start_temperature())
+start_vibration = int(files.get_start_vibration())
 # pipe limit for tempreture and vibration
-limit_temperature = 40
-limit_vibration = 10
+limit_temperature = int(files.get_limit_temperature())
+limit_vibration = int(files.get_limit_vibration())
 # max time each sensor can run. will be timed by three for the number of sensors
-sensor_interval_time = 20
+sensor_interval_time = int(files.get_teat_time())
 # [warning, alerm, emergency]
-warning_temp = [37, 38, 39]
-warning_vib = [3, 6, 9]
+warning_temp = [files.get_sensor_temp_warning(), files.get_sensor_temp_alart(), files.get_sensor_temp_emergency()]
+warning_vib = [files.get_sensor_vib_warning(), files.get_sensor_vib_alart(), files.get_sensor_vib_emergency()]
 
 env.process(pipe_generator(env, start_temperature, start_vibration, limit_temperature, limit_vibration, sensor_interval_time, sensor, warning_temp,warning_vib,rows))
 # run the simulation
