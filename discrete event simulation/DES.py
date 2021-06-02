@@ -89,8 +89,8 @@ def sensor_generator(env, sensor_id,start_temperature,highest_temp, start_vibrat
     if new_id == 0:
         # set sensor one data
         sensor_one_data = [f'{temperature:5.2f} ',f'{vib_warning}',f'{temp_alerm}',f'{temp_emergency}',f'{vibration}',f'{vib_warning}',f'{vib_alerm}',f'{vib_emergency}']
-        sensor_two_data = [f'{start_temperature}',f'{False}',f'{False}',f'{False}',f'{start_vibration}',f'{False}',f'{False}',f'{False}']
-        sensor_three_data = [f'{start_temperature}',f'{False}',f'{False}',f'{False}',f'{start_vibration}',f'{False}',f'{False}',f'{False}']
+        sensor_two_data = [f'{start_temperature}','','','',f'{start_vibration}','','','']
+        sensor_three_data = [f'{start_temperature}','','','',f'{start_vibration}','','','']
         #append the data to the csv rows array
         rows.append([f'{current_time:5.3f}'] + sensor_one_data + sensor_two_data + sensor_three_data)
         
@@ -160,8 +160,8 @@ def sensor_generator(env, sensor_id,start_temperature,highest_temp, start_vibrat
                 # time, warnings
                 # set sensor one data
                 sensor_one_data = [f'{temperature:5.2f} ',f'{vib_warning}',f'{temp_alerm}',f'{temp_emergency}',f'{vibration}',f'{vib_warning}',f'{vib_alerm}',f'{vib_emergency}']
-                sensor_two_data = [f'{start_temperature}',f'{False}',f'{False}',f'{False}',f'{start_vibration}',f'{False}',f'{False}',f'{False}']
-                sensor_three_data = [f'{start_temperature}',f'{False}',f'{False}',f'{False}',f'{start_vibration}',f'{False}',f'{False}',f'{False}']
+                sensor_two_data = [f'{start_temperature}','','','',f'{start_vibration}','','','']
+                sensor_three_data = [f'{start_temperature}','','','',f'{start_vibration}','','','']
                 #append the data to the csv rows array
                 rows.append(time + sensor_one_data + sensor_two_data + sensor_three_data)
                 # write last tempreture to an exturnal text file
