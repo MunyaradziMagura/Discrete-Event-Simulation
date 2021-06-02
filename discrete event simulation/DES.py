@@ -2,6 +2,9 @@ import simpy
 import random
 import secrets
 import csv 
+# used to write to specific line
+import linecache
+import text_files
 
 # field names 
               # sensor 1
@@ -15,15 +18,16 @@ fields = ['time','sensor_one_temp','sensor_one_warning','sensor_one_alarm','sens
             ,'sensor_three_temp_vib','sensor_three_warning_vib','sensor_three_alarm_vib','sensor_three_emergency_vib']
 # data rows of csv file 
 rows = [] 
-    
 # name of csv file 
 filename = "sensor_data.csv"
 
 # write the id to an external text file for storage and dataloss prevention
 def identification(id):
+    #add sensor data
     with open('id.txt', 'w') as f:
-        f.write(f"{id}")
+        f.write(f"{id}\n")
     return id
+
 
 #  generate the pipe 
 def pipe_generator(env, start_temperature, start_vibration, limit_temperature, limit_vibration, sensor_interval_time, sensor, warning_temp,warning_vib,rows):
@@ -38,7 +42,6 @@ def pipe_generator(env, start_temperature, start_vibration, limit_temperature, l
     while True and sensor_id < 3:
         # set id
         identification(sensor_id)
-       
         csv_data = []
         # add the last temp to the new 
         if highest_temp > 0:
@@ -89,18 +92,6 @@ def sensor_generator(env, sensor_id,start_temperature,highest_temp, start_vibrat
         sensor_two_data = [f'{start_temperature}',f'{False}',f'{False}',f'{False}',f'{start_vibration}',f'{False}',f'{False}',f'{False}']
         sensor_three_data = [f'{start_temperature}',f'{False}',f'{False}',f'{False}',f'{start_vibration}',f'{False}',f'{False}',f'{False}']
         #append the data to the csv rows array
-        rows.append([f'{current_time:5.3f}'] + sensor_one_data + sensor_two_data + sensor_three_data)
-        
-    elif new_id == 1:
-        sensor_one_data = [f'{start_temperature}',f'{None}',f'{None}',f'{None}',f'{start_vibration}',f'{None}',f'{None}',f'{None}']
-        sensor_two_data = [f'{temperature:5.2f} ',f'{vib_warning}',f'{temp_alerm}',f'{temp_emergency}',f'{vibration}',f'{vib_warning}',f'{vib_alerm}',f'{vib_emergency}']
-        sensor_three_data = [f'{start_temperature}',f'{False}',f'{False}',f'{False}',f'{start_vibration}',f'{False}',f'{False}',f'{False}']
-        rows.append([f'{current_time:5.3f}'] + sensor_one_data + sensor_two_data + sensor_three_data)
-        
-    elif new_id == 2:
-        sensor_one_data = ['Done',f'{None}',f'{None}',f'{None}','Done',f'{None}',f'{None}',f'{None}']
-        sensor_two_data = ['Done',f'{None}',f'{None}',f'{None}','Done',f'{None}',f'{None}',f'{None}']
-        sensor_three_data = [f'{temperature:5.2f} ',f'{vib_warning}',f'{temp_alerm}',f'{temp_emergency}',f'{vibration}',f'{vib_warning}',f'{vib_alerm}',f'{vib_emergency}']
         rows.append([f'{current_time:5.3f}'] + sensor_one_data + sensor_two_data + sensor_three_data)
         
     # request the sensor data
@@ -161,12 +152,11 @@ def sensor_generator(env, sensor_id,start_temperature,highest_temp, start_vibrat
 
             # get current time into an array
             print(f"current_time {env.now:5.2f} |" ,end="")
-            time = [f"{env.now:5.2f}"]
+            time = [f'{env.now + 0.01:5.2f}']
             if new_id == 0:
                 print( f' temp changed to {temperature:5.2f} degree/s Celsius at {env.now:5.2f} min/s || vibrated by {vibration} cubic meters |', end="")
                 print("N/A   |", end="")  # sensor id = 1
                 print("N/A")  # sensor id = 2
-
                 # time, warnings
                 # set sensor one data
                 sensor_one_data = [f'{temperature:5.2f} ',f'{vib_warning}',f'{temp_alerm}',f'{temp_emergency}',f'{vibration}',f'{vib_warning}',f'{vib_alerm}',f'{vib_emergency}']
@@ -174,29 +164,47 @@ def sensor_generator(env, sensor_id,start_temperature,highest_temp, start_vibrat
                 sensor_three_data = [f'{start_temperature}',f'{False}',f'{False}',f'{False}',f'{start_vibration}',f'{False}',f'{False}',f'{False}']
                 #append the data to the csv rows array
                 rows.append(time + sensor_one_data + sensor_two_data + sensor_three_data)
+                # write last tempreture to an exturnal text file
+                temp_sen_0 = text_files.create_text('temp0', f'{temperature:5.2f}')
+                #store last vibration value
+                vib_sen_0 = text_files.create_text('vib0', f'{vibration:5.2f}')
+                
             elif new_id == 1:
                 print("N/A   |", end="")  # sensor id = 0
                 print( f' temp changed to {temperature:5.2f} degree/s Celsius at {env.now:5.2f} min/s || vibrated by {vibration} cubic meters |', end="")
                 print("N/A   |")  # sensor id = 2
-                sensor_one_data = ['Done',f'{start_temperature}''',f'{None}',f'{None}',f'{None}','Done',f'{None}',f'{None}',f'{None}']
+                #get previous sensors last values both temperture and vibration
+                last_temp_senor_0 = text_files.get_text_value("temp0")
+                last_vib_senor_0 = text_files.get_text_value("vib0")
+
+                # create arrays to store the values
+                sensor_one_data = [f'{last_temp_senor_0}','','','',f'{last_vib_senor_0}','','','']
                 sensor_two_data = [f'{temperature:5.2f} ',f'{vib_warning}',f'{temp_alerm}',f'{temp_emergency}',f'{vibration}',f'{vib_warning}',f'{vib_alerm}',f'{vib_emergency}']
-                sensor_three_data = [f'{start_temperature}',f'{False}',f'{False}',f'{False}',f'{start_vibration}',f'{False}',f'{False}',f'{False}']
+                sensor_three_data = [f'{start_temperature}','','','',f'{start_vibration}','','','']
                 rows.append(time + sensor_one_data + sensor_two_data + sensor_three_data)
+                #save last temp values to text files
+                temp_sen_1 = text_files.create_text('temp1',  f'{temperature:5.2f}')
+                vib_sen_1 = text_files.create_text('vib1', f'{vibration:5.2f}')
+
+
             elif new_id == 2:
                 print("N/A   |", end="")  # sensor id = 0
                 print("N/A   |", end="")  # sensor id = 1
                 print( f' temp changed to {temperature:5.2f} degree/s Celsius at {env.now:5.2f} min/s || vibrated by {vibration} cubic meters |')  
-                sensor_one_data = ['Done',f'{None}',f'{None}',f'{None}','Done',f'{None}',f'{None}',f'{None}']
-                sensor_two_data = ['Done',f'{None}',f'{None}',f'{None}','Done',f'{None}',f'{None}',f'{None}']
+                last_temp_senor_0 = text_files.get_text_value("temp0")
+                last_vib_senor_0 = text_files.get_text_value("vib0")
+                last_temp_senor_1 = text_files.get_text_value("temp1")
+                last_vib_senor_1 = text_files.get_text_value("vib1")
+
+                sensor_one_data = [f'{last_temp_senor_0}','','','',f'{last_vib_senor_0}','','','']
+                sensor_two_data = [f'{last_temp_senor_1}','','','',f'{last_vib_senor_1}','','','']
                 sensor_three_data = [f'{temperature:5.2f} ',f'{vib_warning}',f'{temp_alerm}',f'{temp_emergency}',f'{vibration}',f'{vib_warning}',f'{vib_alerm}',f'{vib_emergency}']
                 rows.append(time + sensor_one_data + sensor_two_data + sensor_three_data)
+                temp_sen_2 = text_files.create_text('temp2',  f'{temperature:5.2f}')
+                vib_sen_2 = text_files.create_text('vib2', f'{vibration:5.2f}')
 
             # instead of yielding the arrival time, yield a Timeout Event
             yield env.timeout(interarrival,highest_temp)
-
-
-# notifications need to be in diffenrt tables
-# data can be generated in sec or min
 
 # initlise the descrete event simulation enviroment
 env = simpy.Environment()
@@ -227,3 +235,6 @@ with open(filename, 'w') as csvfile:
     csvwriter.writerow(fields) 
     # writing the data rows 
     csvwriter.writerows(rows)
+
+# clean the csv by removing empty rows
+text_files.clean_csv(filename)
