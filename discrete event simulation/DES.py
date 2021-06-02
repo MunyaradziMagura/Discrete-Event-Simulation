@@ -4,7 +4,7 @@ import secrets
 import csv 
 # used to write to specific line
 import linecache
-import text_files
+import files
 
 # field names 
               # sensor 1
@@ -165,17 +165,17 @@ def sensor_generator(env, sensor_id,start_temperature,highest_temp, start_vibrat
                 #append the data to the csv rows array
                 rows.append(time + sensor_one_data + sensor_two_data + sensor_three_data)
                 # write last tempreture to an exturnal text file
-                temp_sen_0 = text_files.create_text('temp0', f'{temperature:5.2f}')
+                temp_sen_0 = files.create_text('temp0', f'{temperature:5.2f}')
                 #store last vibration value
-                vib_sen_0 = text_files.create_text('vib0', f'{vibration:5.2f}')
+                vib_sen_0 = files.create_text('vib0', f'{vibration:5.2f}')
                 
             elif new_id == 1:
                 print("N/A   |", end="")  # sensor id = 0
                 print( f' temp changed to {temperature:5.2f} degree/s Celsius at {env.now:5.2f} min/s || vibrated by {vibration} cubic meters |', end="")
                 print("N/A   |")  # sensor id = 2
                 #get previous sensors last values both temperture and vibration
-                last_temp_senor_0 = text_files.get_text_value("temp0")
-                last_vib_senor_0 = text_files.get_text_value("vib0")
+                last_temp_senor_0 = files.get_text_value("temp0")
+                last_vib_senor_0 = files.get_text_value("vib0")
 
                 # create arrays to store the values
                 sensor_one_data = [f'{last_temp_senor_0}','','','',f'{last_vib_senor_0}','','','']
@@ -183,25 +183,25 @@ def sensor_generator(env, sensor_id,start_temperature,highest_temp, start_vibrat
                 sensor_three_data = [f'{start_temperature}','','','',f'{start_vibration}','','','']
                 rows.append(time + sensor_one_data + sensor_two_data + sensor_three_data)
                 #save last temp values to text files
-                temp_sen_1 = text_files.create_text('temp1',  f'{temperature:5.2f}')
-                vib_sen_1 = text_files.create_text('vib1', f'{vibration:5.2f}')
+                temp_sen_1 = files.create_text('temp1',  f'{temperature:5.2f}')
+                vib_sen_1 = files.create_text('vib1', f'{vibration:5.2f}')
 
 
             elif new_id == 2:
                 print("N/A   |", end="")  # sensor id = 0
                 print("N/A   |", end="")  # sensor id = 1
                 print( f' temp changed to {temperature:5.2f} degree/s Celsius at {env.now:5.2f} min/s || vibrated by {vibration} cubic meters |')  
-                last_temp_senor_0 = text_files.get_text_value("temp0")
-                last_vib_senor_0 = text_files.get_text_value("vib0")
-                last_temp_senor_1 = text_files.get_text_value("temp1")
-                last_vib_senor_1 = text_files.get_text_value("vib1")
+                last_temp_senor_0 = files.get_text_value("temp0")
+                last_vib_senor_0 = files.get_text_value("vib0")
+                last_temp_senor_1 = files.get_text_value("temp1")
+                last_vib_senor_1 = files.get_text_value("vib1")
 
                 sensor_one_data = [f'{last_temp_senor_0}','','','',f'{last_vib_senor_0}','','','']
                 sensor_two_data = [f'{last_temp_senor_1}','','','',f'{last_vib_senor_1}','','','']
                 sensor_three_data = [f'{temperature:5.2f} ',f'{vib_warning}',f'{temp_alerm}',f'{temp_emergency}',f'{vibration}',f'{vib_warning}',f'{vib_alerm}',f'{vib_emergency}']
                 rows.append(time + sensor_one_data + sensor_two_data + sensor_three_data)
-                temp_sen_2 = text_files.create_text('temp2',  f'{temperature:5.2f}')
-                vib_sen_2 = text_files.create_text('vib2', f'{vibration:5.2f}')
+                temp_sen_2 = files.create_text('temp2',  f'{temperature:5.2f}')
+                vib_sen_2 = files.create_text('vib2', f'{vibration:5.2f}')
 
             # instead of yielding the arrival time, yield a Timeout Event
             yield env.timeout(interarrival,highest_temp)
@@ -237,4 +237,4 @@ with open(filename, 'w') as csvfile:
     csvwriter.writerows(rows)
 
 # clean the csv by removing empty rows
-text_files.clean_csv(filename)
+files.clean_csv(filename)
