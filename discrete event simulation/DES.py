@@ -2,7 +2,7 @@ import simpy
 import random
 import secrets
 import csv
-
+import os
 # stores all the file functions
 import files
 
@@ -287,3 +287,12 @@ with open(filename, 'w') as csvfile:
 
 # clean the csv by removing empty rows
 files.clean_csv(filename)
+
+# remove temp files
+os.remove("id.txt")
+os.remove("temp0.txt")
+os.remove("temp1.txt")
+os.remove("temp2.txt")
+os.remove("vib0.txt")
+os.remove("vib1.txt")
+os.remove("vib2.txt")
