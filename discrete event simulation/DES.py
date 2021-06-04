@@ -77,7 +77,6 @@ def pipe_generator(env, start_temperature, start_vibration, limit_temperature, l
 
 # this function is the waters journey through the pipe
 def sensor_generator(env, sensor_id, start_temperature, highest_temp, start_vibration, limit_temperature, limit_vibration, sensor_interval_time, sensor, warning_temp, warning_vib):
-    # def sensor_generator(env, start_temperature, highest_temp, start_vibration, limit_temperature, limit_vibration, sensor_interval_time, sensor, warning_temp):
 
     # record the time the water starts changing tempreture at this sensor
     current_time = env.now
@@ -250,8 +249,8 @@ def sensor_generator(env, sensor_id, start_temperature, highest_temp, start_vibr
 
 # initlise the descrete event simulation enviroment
 env = simpy.Environment()
-
 sensor = simpy.Resource(env, capacity=1)
+
 # starting tempreture & vibration
 start_temperature = int(files.get_start_temperature())
 start_vibration = int(files.get_start_vibration())
