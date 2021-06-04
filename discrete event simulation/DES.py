@@ -3,9 +3,6 @@ import random
 import secrets
 import csv 
 
-# used to write to specific line
-import linecache
-
 # stores all the file functions 
 import files
 
