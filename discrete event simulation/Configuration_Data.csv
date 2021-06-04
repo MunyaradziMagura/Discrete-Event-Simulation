@@ -1,0 +1,2 @@
+﻿Start temperature,Limit temperature,Start Vibration,Limit Vibration,Teat Time,Sensor_temp_warning,Sensor_temp_alart,Sensor_temp_emergency,Sensor_vib_warning,Sensor_vib_alart,Sensor_vib_emergency,
+30,50,10,20,20,21,25,26,30,15,23
