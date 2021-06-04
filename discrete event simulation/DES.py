@@ -289,10 +289,17 @@ with open(filename, 'w') as csvfile:
 files.clean_csv(filename)
 
 # remove temp files
-os.remove("id.txt")
-os.remove("temp0.txt")
-os.remove("temp1.txt")
-os.remove("temp2.txt")
-os.remove("vib0.txt")
-os.remove("vib1.txt")
-os.remove("vib2.txt")
+if os.path.exists("id.txt"):
+    os.remove("id.txt")
+if os.path.exists("temp0.txt"):
+    os.remove("temp0.txt")
+if os.path.exists("temp1.txt"):
+    os.remove("temp1.txt")
+if os.path.exists("temp2.txt"):
+    os.remove("temp2.txt")
+if os.path.exists("vib0.txt"):
+    os.remove("vib0.txt")
+if os.path.exists("vib1.txt"):
+    os.remove("vib1.txt")
+if os.path.exists("vib2.txt"):
+    os.remove("vib2.txt")
