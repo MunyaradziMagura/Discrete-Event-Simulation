@@ -1,4 +1,3 @@
-import json
 import dash
 from dash.dependencies import Input, Output
 import dash_table
@@ -57,21 +56,6 @@ html.Div([
 
 ])
 ])
-
-
-@app.callback(
-    Output('datatable-query-structure', 'children'),
-    Input('datatable-advanced-filtering', 'derived_filter_query_structure')
-)
-def display_query(query):
-    if query is None:
-        return ''
-    return html.Details([
-        html.Summary('Derived filter query structure'),
-        html.Div(dcc.Markdown('''```json
-{}
-```'''.format(json.dumps(query, indent=4))))
-    ])
 
 
 #bar chart
