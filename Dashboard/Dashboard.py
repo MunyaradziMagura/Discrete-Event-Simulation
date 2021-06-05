@@ -129,29 +129,30 @@ def display_query(query):
 
 #bar chart
 @app.callback(
-    Output('bar-chart','children'),
+    Output('bar-chart', 'children'),
     Input('datatable-advanced-filtering', "derived_virtual_data"),
-    Input('datatable-advanced-filtering', "derived_virtual_selected_rows")
 )
-def update_bar(all_rows_data, slctd_row_indices):
-    print('***************************************************************************')
-    print('Data across all pages pre or post filtering: {}'.format(all_rows_data))
-    print('---------------------------------------------')
-    print("Indices of selected rows if part of table after filtering:{}".format(slctd_row_indices))
+def update_bar(all_rows_data):
     dff = pd.DataFrame(all_rows_data)
-    colors = ['#7FDBFF' if i in slctd_row_indices else '#0074D9'
-              for i in range(len(dff))]
     if "time" in dff and "sensor_one_temp" in dff:
         return [
-            dcc.Graph(id='bar-chart',
-                      figure=px.bar(
-                          data_frame=dff,
-                          x="time",
-                          y='sensor_one_temp',
-                          labels={"sensor_one_temp": "The data of sensors"},
-                      ).update_layout(showlegend=False, xaxis={'categoryorder': 'total ascending'})
-                      .update_traces(marker_color=colors, hovertemplate="<b>%{y}%</b><extra></extra>")
-                      ),
+            dcc.Graph(
+                id='bar-chart',
+                figure={
+                    'data':[
+                        # six bars for six different data
+                        {'x': df['time'], 'y': df['sensor_one_temp'], 'type':'bar', 'name':'sensor_one_temp'},
+                        {'x': df['time'], 'y': df['sensor_one_vib'], 'type':'bar', 'name':'sensor_one_vib'},
+                        {'x': df['time'], 'y': df['sensor_two_temp'], 'type':'bar', 'name': 'sensor_two_temp'},
+                        {'x': df['time'], 'y': df['sensor_two_temp_vib'], 'type':'bar', 'name': 'sensor_two_temp_vib'},
+                        {'x': df['time'], 'y': df['sensor_three_temp'], 'type':'bar', 'name': 'sensor_three_temp'},
+                        {'x': df['time'], 'y': df['sensor_three_temp_vib'], 'type':'bar', 'name': 'sensor_three_temp_vib'}
+                    ],
+                    'layout':{
+                        'title': 'Bar Chart' #the title of the bar chart
+                    }
+                }
+            )
         ]
 
 # line graph
