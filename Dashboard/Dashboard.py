@@ -4,10 +4,9 @@ from dash.dependencies import Input, Output
 import dash_table
 import dash_core_components as dcc
 import dash_html_components as html
-import plotly.express as px
 import pandas as pd
 
-df = pd.read_csv('sensor_data .csv')
+df = pd.read_csv('sensor_data.csv')
 # open the csv file to get data
 df.drop(['sensor_one_warning','sensor_one_alarm','sensor_one_emergency','sensor_one_warning_vib',
          'sensor_one_alarm_vib','sensor_one_emergency_vib','sensor_two_warning','sensor_two_alarm',
@@ -16,8 +15,6 @@ df.drop(['sensor_one_warning','sensor_one_alarm','sensor_one_emergency','sensor_
          'sensor_three_alarm_vib', 'sensor_three_emergency_vib'],axis=1,inplace=True)
 #delete the unuseful columns
 
-df['id'] = df['time']
-df.set_index('id', inplace=True, drop=False)
 
 app = dash.Dash(__name__)
 
@@ -28,22 +25,9 @@ html.Div([
 # make a title for dashboard
 
 html.Div([
-    dcc.RadioItems(
-        id='datatable',
-        options=[
-            {'label': 'Read filter_query', 'value': 'read'},
-            {'label': 'Write to filter_query', 'value': 'write'}
-        ],
-        value='read'
-    ),
 
     html.Br(),
     #define some id, these will be used later
-    dcc.Input(id='filter-query-input', placeholder='Enter filter query'),
-
-    html.Div(id='filter-query-output'),
-
-    html.Hr(),
 
     html.Div(id='bar-chart'),
     html.Div(id='line-graph'),
@@ -73,43 +57,6 @@ html.Div([
 
 ])
 ])
-
-# use callback to pass the value returned by def below to id 'filter-query-input'
-@app.callback(
-    Output('filter-query-input', 'style'),
-    Output('filter-query-output', 'style'),
-    Input('datatable', 'value')
-)
-def query_input_output(val):
-    input_style = {'width': '200%'}
-    output_style = {}
-    if val == 'read':
-        input_style.update(display='none')
-        output_style.update(display='inline-block')
-    else:
-        input_style.update(display='inline-block')
-        output_style.update(display='none')
-    return input_style, output_style
-
-
-@app.callback(
-    Output('datatable-advanced-filtering', 'filter_query'),
-    Input('filter-query-input', 'value')
-)
-def write_query(query):
-    if query is None:
-        return ''
-    return query
-
-
-@app.callback(
-    Output('filter-query-output', 'children'),
-    Input('datatable-advanced-filtering', 'filter_query')
-)
-def read_query(query):
-    if query is None:
-        return "No filter query"
-    return dcc.Markdown('`filter_query = "{}"`'.format(query))
 
 
 @app.callback(
@@ -183,17 +130,6 @@ def update_line(all_rows_data):
             )
         ]
 
-
-
-@app.callback(
-    Output('datatable-advanced-filtering', 'style_data_conditional'),
-    [Input('datatable-advanced-filtering', 'selected_columns')]
-)
-def update_styles(selected_columns):
-    return [{
-        'if': {'column_id': i},
-        'background_color': '#D2F3FF'
-    } for i in selected_columns]
 
 if __name__ == '__main__':
     app.run_server(debug=True)
