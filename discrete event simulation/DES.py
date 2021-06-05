@@ -1,15 +1,9 @@
 import simpy
 import random
 import secrets
-<<<<<<< HEAD
-import csv 
-
-# stores all the file functions 
-=======
 import csv
 import os
 # stores all the file functions
->>>>>>> ac6cf6fa3fbd5e88bb648a38605c301919b00f7e
 import files
 
 # field names for csv
