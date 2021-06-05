@@ -169,12 +169,12 @@ def update_line(all_rows_data):
                 figure={
                     'data':[
                         # six lines for six different data
-                        {'x': df['time'], 'y': df['sensor_one_temp'], 'name':'sensor_one_temp'},
-                        {'x': df['time'], 'y': df['sensor_one_vib'], 'name':'sensor_one_vib'},
-                        {'x': df['time'], 'y': df['sensor_two_temp'], 'name': 'sensor_two_temp'},
-                        {'x': df['time'], 'y': df['sensor_two_temp_vib'], 'name': 'sensor_two_temp_vib'},
-                        {'x': df['time'], 'y': df['sensor_three_temp'], 'name': 'sensor_three_temp'},
-                        {'x': df['time'], 'y': df['sensor_three_temp_vib'], 'name': 'sensor_three_temp_vib'}
+                        {'x': df['time'], 'y': df['sensor_one_temp'], 'type':'line', 'name':'sensor_one_temp'},
+                        {'x': df['time'], 'y': df['sensor_one_vib'], 'type':'line', 'name':'sensor_one_vib'},
+                        {'x': df['time'], 'y': df['sensor_two_temp'], 'type':'line', 'name': 'sensor_two_temp'},
+                        {'x': df['time'], 'y': df['sensor_two_temp_vib'], 'type':'line', 'name': 'sensor_two_temp_vib'},
+                        {'x': df['time'], 'y': df['sensor_three_temp'], 'type':'line', 'name': 'sensor_three_temp'},
+                        {'x': df['time'], 'y': df['sensor_three_temp_vib'], 'type':'line', 'name': 'sensor_three_temp_vib'}
                     ],
                     'layout':{
                         'title': 'Line Graph' #the title of the line Graph
