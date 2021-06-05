@@ -1,12 +1,20 @@
+import json
 import dash
 from dash.dependencies import Input, Output
 import dash_table
 import dash_core_components as dcc
 import dash_html_components as html
+import plotly.express as px
 import pandas as pd
-import json
 
-df = pd.read_csv('sensor_data.csv')
+df = pd.read_csv('sensor_data .csv')
+# open the csv file to get data
+df.drop(['sensor_one_warning','sensor_one_alarm','sensor_one_emergency','sensor_one_warning_vib',
+         'sensor_one_alarm_vib','sensor_one_emergency_vib','sensor_two_warning','sensor_two_alarm',
+         'sensor_two_emergency','sensor_two_warning_vib','sensor_two_alarm_vib','sensor_two_emergency_vib',
+         'sensor_three_warning', 'sensor_three_alarm', 'sensor_three_emergency', 'sensor_three_warning_vib',
+         'sensor_three_alarm_vib', 'sensor_three_emergency_vib'],axis=1,inplace=True)
+#delete the unuseful columns
 
 df['id'] = df['time']
 df.set_index('id', inplace=True, drop=False)
@@ -17,6 +25,7 @@ app.layout = html.Div([
 html.Div([
     html.H3('Dashboard')
 ]),
+# make a title for dashboard
 
 html.Div([
     dcc.RadioItems(
@@ -29,13 +38,17 @@ html.Div([
     ),
 
     html.Br(),
-
+    #define some id, these will be used later
     dcc.Input(id='filter-query-input', placeholder='Enter filter query'),
 
     html.Div(id='filter-query-output'),
 
     html.Hr(),
 
+    html.Div(id='bar-chart'),
+    html.Div(id='line-graph'),
+
+# define the detail of datatable
     dash_table.DataTable(
         id='datatable-advanced-filtering',
         columns=[
@@ -44,22 +57,24 @@ html.Div([
             if i != 'id'
         ],
         data=df.to_dict('records'),
-        editable=True,
-        page_action='native',
-        page_size=10,
-        filter_action="native",
+        editable=True, #editing the cells
+        page_action='native', # all data is passed to the table up-front or not ('none')
+        page_size=10,   # number of rows visible per page
+        filter_action="native", #filtering by column
         style_cell={
-            'textAlign':'left',
+            'textAlign':'left', # align text columns to left. By default they are aligned to right
             'minWidth': 210,'maxWidth': 210,'Width': 210,
+            # couse some of the texts are too long so I make the width big
             'backgroundColor':'white'
         },
-        style_cell_conditional=[{'textAlign':'left'}]
     ),
     html.Hr(),
     html.Div(id='datatable-query-structure', style={'whitespace': 'pre'})
+
 ])
 ])
 
+# use callback to pass the value returned by def below to id 'filter-query-input'
 @app.callback(
     Output('filter-query-input', 'style'),
     Output('filter-query-output', 'style'),
@@ -111,32 +126,73 @@ def display_query(query):
 ```'''.format(json.dumps(query, indent=4))))
     ])
 
-# @app.callback(
-#     Output(component_id='datatable-query-structure', component_property='children'),
-#     [Input(component_id='datatable', component_property="derived_virtual_data"),
-#      Input(component_id='datatable', component_property='derived_virtual_selected_rows'),
-#      Input(component_id='datatable', component_property='derived_virtual_selected_row_ids'),
-#      Input(component_id='datatable', component_property='selected_rows'),
-#      Input(component_id='datatable', component_property='derived_virtual_indices'),
-#      Input(component_id='datatable', component_property='derived_virtual_row_ids'),
-#      Input(component_id='datatable', component_property='active_cell'),
-#      Input(component_id='datatable', component_property='selected_cells')]
-# )
-# def update_bar(all_rows_data, slctd_row_indices, slct_rows_names, slctd_rows,
-#                order_of_rows_indices, order_of_rows_names, actv_cell, slctd_cell):
-#     print('***************************************************************************')
-#     print('Data across all pages pre or post filtering: {}'.format(all_rows_data))
-#     print('---------------------------------------------')
-#     print("Indices of selected rows if part of table after filtering:{}".format(slctd_row_indices))
-#     print("Names of selected rows if part of table after filtering: {}".format(slct_rows_names))
-#     print("Indices of selected rows regardless of filtering results: {}".format(slctd_rows))
-#     print('---------------------------------------------')
-#     print("Indices of all rows pre or post filtering: {}".format(order_of_rows_indices))
-#     print("Names of all rows pre or post filtering: {}".format(order_of_rows_names))
-#     print("---------------------------------------------")
-#     print("Complete data of active cell: {}".format(actv_cell))
-#     print("Complete data of all selected cells: {}".format(slctd_cell))
 
+#bar chart
+@app.callback(
+    Output('bar-chart','children'),
+    Input('datatable-advanced-filtering', "derived_virtual_data"),
+    Input('datatable-advanced-filtering', "derived_virtual_selected_rows")
+)
+def update_bar(all_rows_data, slctd_row_indices):
+    print('***************************************************************************')
+    print('Data across all pages pre or post filtering: {}'.format(all_rows_data))
+    print('---------------------------------------------')
+    print("Indices of selected rows if part of table after filtering:{}".format(slctd_row_indices))
+    dff = pd.DataFrame(all_rows_data)
+    colors = ['#7FDBFF' if i in slctd_row_indices else '#0074D9'
+              for i in range(len(dff))]
+    if "time" in dff and "sensor_one_temp" in dff:
+        return [
+            dcc.Graph(id='bar-chart',
+                      figure=px.bar(
+                          data_frame=dff,
+                          x="time",
+                          y='sensor_one_temp',
+                          labels={"sensor_one_temp": "The data of sensors"},
+                      ).update_layout(showlegend=False, xaxis={'categoryorder': 'total ascending'})
+                      .update_traces(marker_color=colors, hovertemplate="<b>%{y}%</b><extra></extra>")
+                      ),
+        ]
+
+# line graph
+@app.callback(
+    Output('line-graph', 'children'),
+    Input('datatable-advanced-filtering', "derived_virtual_data"),
+)
+def update_line(all_rows_data):
+    dff = pd.DataFrame(all_rows_data)
+    if "time" in dff and "sensor_one_temp" in dff:
+        return [
+            dcc.Graph(
+                id='line-graph',
+                figure={
+                    'data':[
+                        # six lines for six different data
+                        {'x': df['time'], 'y': df['sensor_one_temp'], 'name':'sensor_one_temp'},
+                        {'x': df['time'], 'y': df['sensor_one_vib'], 'name':'sensor_one_vib'},
+                        {'x': df['time'], 'y': df['sensor_two_temp'], 'name': 'sensor_two_temp'},
+                        {'x': df['time'], 'y': df['sensor_two_temp_vib'], 'name': 'sensor_two_temp_vib'},
+                        {'x': df['time'], 'y': df['sensor_three_temp'], 'name': 'sensor_three_temp'},
+                        {'x': df['time'], 'y': df['sensor_three_temp_vib'], 'name': 'sensor_three_temp_vib'}
+                    ],
+                    'layout':{
+                        'title': 'Line Graph' #the title of the line Graph
+                    }
+                }
+            )
+        ]
+
+
+
+@app.callback(
+    Output('datatable-advanced-filtering', 'style_data_conditional'),
+    [Input('datatable-advanced-filtering', 'selected_columns')]
+)
+def update_styles(selected_columns):
+    return [{
+        'if': {'column_id': i},
+        'background_color': '#D2F3FF'
+    } for i in selected_columns]
 
 if __name__ == '__main__':
     app.run_server(debug=True)
