@@ -1,6 +1,6 @@
 import pandas as pd
 import csv
-
+sensor_id = []
 #create text file to store value 
 def create_text(name, value):
     with open(f'{name}.txt', 'w') as f:
@@ -57,3 +57,10 @@ def get_sensor_vib_alart():
 
 def get_sensor_vib_emergency():
     return float(array[10])
+
+def set_sensor_id(current_id):
+    sensor_id.append(current_id)
+    return current_id
+
+def get_sensor_id():
+    return sensor_id[-1]
