@@ -8,13 +8,16 @@ import files
 
 # field names for csv
 # sensor 1
-fields = ['sensorID', 'time', 'value','sensor_type','alert','warning','emergency']
+fields = ['sensorID', 'time','temperature','vibration']
+alarm_feilds = ['sensorID', 'time','temp_alert','vib_alert','temp_warning','vib_warning','temp_emergency','vib__emergency']
 
 # data rows of csv file
 rows = []
+alarm_rows = []
 
 # name of csv file
 filename = "sensor_data.csv"
+alarm_file = 'alarm.csv'
 
 # write the id to an external text file for storage and dataloss prevention
 
@@ -66,7 +69,7 @@ def pipe_generator(env, start_temperature, start_vibration, limit_temperature, l
 def sensor_generator(env, sensor_id, start_temperature, highest_temp, start_vibration, limit_temperature, limit_vibration, sensor_interval_time, sensor, warning_temp, warning_vib):
     
     # record the time the water starts changing tempreture at this sensor
-    current_time = env.now
+    current_time = f'{env.now:5.2f}'
 
     # temperature
     temperature = start_temperature
@@ -82,13 +85,25 @@ def sensor_generator(env, sensor_id, start_temperature, highest_temp, start_vibr
     vib_warning = False
     vib_alerm = False
     vib_emergency = False
-   
-    # get the staring states of each sensor
-    current_temp_values = [files.get_sensor_id(),current_time,start_temperature,'temperature']
-    current_viv_values = [files.get_sensor_id(),current_time,start_vibration,'vibration']
-    rows.append(current_temp_values)
-    rows.append(current_viv_values)
+   # catch vibration alerts: [warning, alerm, emergency]
+    if temperature > warning_temp[0]:
+        temp_warning = True
+        if temperature > warning_temp[1]:
+            temp_alerm = True
+            if temperature > warning_temp[2]:
+                temp_emergency = True
 
+    # catch vibration alerts
+    if vibration > warning_vib[0]:
+        vib_warning = True
+        if vibration > warning_vib[1]:
+            vib_alerm = True
+            if vibration > warning_vib[2]:
+                vib_emergency = True
+    
+    # get the staring states of each sensor
+    rows.append([files.get_sensor_id(),current_time,start_temperature,start_vibration])
+    alarm_rows.append([files.get_sensor_id(),current_time, temp_warning,vib_warning, temp_alerm,vib_alerm,temp_emergency,vib_emergency])
 
     # request the sensor data
     with sensor.request() as req:
@@ -151,13 +166,12 @@ def sensor_generator(env, sensor_id, start_temperature, highest_temp, start_vibr
             temperature_current = f'{temperature:5.2f} '
             vibration_current = f'{vibration}'
             
-            # print('sensorID', 'time', 'value','sensor_type','alert','warning','emergency')
+            # fields = ['sensorID', 'time','temperature','vibration']
+            # alarm_feilds = ['sensorID', 'time','temp_alert','vib_alarm','temp_warning','vib_warning','temp_emergency','vib_emergency']
             print(f'{files.get_sensor_id()} {time}  {temperature_current} {vibration_current}')
-            current_temp_values = [files.get_sensor_id(),time,temperature_current,'temperature']
-            current_viv_values = [files.get_sensor_id(),time,vibration_current,'vibration']
-            rows.append(current_temp_values)
-            rows.append(current_viv_values)
-
+            rows.append([files.get_sensor_id(),time,temperature_current,vibration_current])
+            # rows.append(current_viv_values)
+            alarm_rows.append([files.get_sensor_id(),time, temp_warning,vib_warning, temp_alerm,vib_alerm,temp_emergency,vib_emergency])
             # instead of yielding the arrival time, yield a Timeout Event
             yield env.timeout(interarrival, highest_temp)
 
@@ -199,5 +213,12 @@ with open(filename, 'w') as csvfile:
     # writing the data rows
     csvwriter.writerows(rows)
 
+# write csv for alarms 
+with open(alarm_file,'w') as csvfile:
+    csvwriter = csv.writer(csvfile)
+    csvwriter.writerow(alarm_feilds)
+    csvwriter.writerows(alarm_rows)
+
 # clean the csv by removing empty rows
 files.clean_csv(filename)
+files.clean_csv(alarm_file)
