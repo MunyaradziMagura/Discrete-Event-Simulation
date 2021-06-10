@@ -56,7 +56,7 @@ figure_line_graph = {'data': data_line,
                      },
                      }
 
-# figure for line graph
+# figure for bar chart
 data_bar = []
 for i in range(0, sensorID_num + 1):
     name_temp = 'sensor_' + str(i + 1) + '_temp'  # set the name for each temp bar
