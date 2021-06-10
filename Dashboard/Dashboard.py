@@ -105,7 +105,7 @@ app.layout = html.Div([
             style_cell={
                 'textAlign': 'left',  # align text columns to left. By default they are aligned to right
                 'minWidth': 210, 'maxWidth': 210, 'Width': 210,
-                # couse some of the texts are too long so I make the width big
+                # cause some of the texts are too long so I make the width big
                 'backgroundColor': 'white'
             },
         ),
