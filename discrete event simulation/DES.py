@@ -34,7 +34,7 @@ def pipe_generator(env, start_temperature, start_vibration, limit_temperature, l
     print('sensorID', 'time', 'value','sensor_type','alert','warning','emergency')
 
     # because there are only three sensors
-    while True and sensor_id < 3:
+    while True and sensor_id < int(files.get_sensor):
 
         # set id
         files.set_sensor_id(sensor_id)
@@ -201,7 +201,7 @@ env.process(pipe_generator(env, start_temperature, start_vibration, limit_temper
             limit_vibration, sensor_interval_time, sensor, warning_temp, warning_vib, rows))
 
 # run the simulation. calculated by: number of sensors (3) and how long they can each run for (sensor_interval_time) 
-env.run(until=sensor_interval_time * 3)
+env.run(until=sensor_interval_time * int(files.get_sensor))
 
 
 # writing to csv file

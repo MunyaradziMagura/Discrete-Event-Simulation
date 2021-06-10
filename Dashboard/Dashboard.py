@@ -4,6 +4,7 @@ import dash_table
 import dash_core_components as dcc
 import dash_html_components as html
 import pandas as pd
+import get_csv_data.py
 
 df = pd.read_csv('sensor_data.csv')
 # open the csv file to get data

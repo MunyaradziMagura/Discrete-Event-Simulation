@@ -22,7 +22,7 @@ def clean_csv(name):
 with open("discrete event simulation\Configuration_Data.csv") as file_name:
     file_read = csv.reader(file_name)
     #  get the array and remove the first row
-    array = list(file_read).pop(-1)
+    array = list(file_read)
 
 #  set getters for each config element: gets values from specific indexes of a csv file turned into an array
 def get_start_temperature():
@@ -57,6 +57,9 @@ def get_sensor_vib_alart():
 
 def get_sensor_vib_emergency():
     return float(array[10])
+
+def get_sensor():
+    return float(array[11])
 
 def set_sensor_id(current_id):
     sensor_id.append(current_id)
