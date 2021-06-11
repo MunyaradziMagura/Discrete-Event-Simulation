@@ -30,7 +30,6 @@ def pipe_generator(env, start_temperature, start_vibration, limit_temperature, l
     highest_temp = 0
 
     # print for clearity when looking at terminal output
-    # print("sensor1  | sensor2 | sensor3")
     print('sensor_number', 'time', 'value','sensor_type','alert','warning','emergency')
 
     # because there are only three sensors
