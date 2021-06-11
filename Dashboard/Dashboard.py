@@ -1,120 +1,117 @@
 import dash
-from dash.dependencies import Input, Output
 import dash_table
 import dash_core_components as dcc
 import dash_html_components as html
 import pandas as pd
-import get_csv_data.py
+import csv
 
-df = pd.read_csv('sensor_data.csv')
-# open the csv file to get data
-df.drop(['sensor_one_warning','sensor_one_alarm','sensor_one_emergency','sensor_one_warning_vib',
-         'sensor_one_alarm_vib','sensor_one_emergency_vib','sensor_two_warning','sensor_two_alarm',
-         'sensor_two_emergency','sensor_two_warning_vib','sensor_two_alarm_vib','sensor_two_emergency_vib',
-         'sensor_three_warning', 'sensor_three_alarm', 'sensor_three_emergency', 'sensor_three_warning_vib',
-         'sensor_three_alarm_vib', 'sensor_three_emergency_vib'],axis=1,inplace=True)
-#delete the unuseful columns
+df = pd.read_csv('sensor_data.csv')  # open the csv file to get data
+# this is used to get the final number of sensorID, in this way can get the whole number of sensors that used
+sensorID = df['sensorID']
+sensorID_list = sensorID.values.tolist()  # change the value of sensorID to list to operate on it
+list_num = []
+for i in sensorID_list:  # use for loop to get all different value in sensorID
+    if i in list_num:
+        continue
+    else:
+        list_num.append(i)  # put the value into list
+sensorID_num = list_num[len(list_num) - 1]  # get the last number of list_num
+sensorID_num = int(sensorID_num)  # change it to int format
 
+# use dictionary to storage data in this way can use it during making line graph and bar chart
+csv_dictionary = {}
+with open('sensor_data.csv', 'r') as file:
+    reader = csv.reader(file)
+    for row in reader:
+        # print(row[1])
+        time = row[1]
+        temp = row[2]
+        vib = row[3]
+        if str(row[0]) in csv_dictionary:
+            # add time
+            csv_dictionary[str(row[0])][0].append(time)
+            # add temperature
+            csv_dictionary[str(row[0])][1].append(temp)
+            # add vibration
+            csv_dictionary[str(row[0])][2].append(vib)
+        else:
+            csv_dictionary[str(row[0])] = [[time], [temp], [vib]]
 
 app = dash.Dash(__name__)
 
+# write the figure outside, so just need to calling this function in dcc.graph
+# figure for line graph
+data_line = []
+for i in range(0, sensorID_num + 1):
+    name_temp = 'sensor_' + str(i + 1) + '_temp'  # because i is 0 at begin, so use i+1. Set the name for each temp line
+    name_vib = 'sensor_' + str(i + 1) + '_vib'  # set the name for each temp line
+    # set x,y value and name for each line we will get
+    data_line.append({'x': csv_dictionary[str(i)][0], 'y': csv_dictionary[str(i)][1], 
+                      'type': 'line', 'name': name_temp})
+    data_line.append({'x': csv_dictionary[str(i)][0], 'y': csv_dictionary[str(i)][2], 
+                      'type': 'line', 'name': name_vib})
+figure_line_graph = {'data': data_line,
+                     'layout': {
+                         'title': 'Line Graph',  # the title of the line graph
+                     },
+                     }
+
+# figure for bar chart
+data_bar = []
+for i in range(0, sensorID_num + 1):
+    name_temp = 'sensor_' + str(i + 1) + '_temp'  # set the name for each temp bar
+    name_vib = 'sensor_' + str(i + 1) + '_vib'  # set the name for each vib bar
+    # set x,y value and name for each bar we will get
+    data_bar.append({'x': csv_dictionary[str(i)][0], 'y': csv_dictionary[str(i)][1], 
+                     'type': 'bar', 'name': name_temp})
+    data_bar.append({'x': csv_dictionary[str(i)][0], 'y': csv_dictionary[str(i)][2], 
+                     'type': 'bar', 'name': name_vib})
+figure_barchart = {'data': data_bar,
+                   'layout': {
+                       'title': 'Bar Chart',  # the title of the bar chart
+                   },
+                   }
+
 app.layout = html.Div([
-html.Div([
-    html.H3('Dashboard')
-]),
-# make a title for dashboard
+    html.Div([
+        html.H3('Dashboard')
+    ]),
+    # make a title for dashboard
 
-html.Div([
+    html.Div([
+        html.Br(),
 
-    html.Br(),
-    #define some id, these will be used later
+        dcc.Graph(id='line garph',
+                  figure=figure_line_graph  # calling figure_line_graph
+                  ),
 
-    html.Div(id='bar-chart'),
-    html.Div(id='line-graph'),
+        dcc.Graph(id='bar chart',
+                  figure=figure_barchart,  # calling figure_barchart
+                  ),
 
-# define the detail of datatable
-    dash_table.DataTable(
-        id='datatable-advanced-filtering',
-        columns=[
-            {'name': i, 'id': i, 'deletable': True} for i in df.columns
-            # omit the id column
-            if i != 'id'
-        ],
-        data=df.to_dict('records'),
-        editable=True, #editing the cells
-        page_action='native', # all data is passed to the table up-front or not ('none')
-        page_size=10,   # number of rows visible per page
-        filter_action="native", #filtering by column
-        style_cell={
-            'textAlign':'left', # align text columns to left. By default they are aligned to right
-            'minWidth': 210,'maxWidth': 210,'Width': 210,
-            # couse some of the texts are too long so I make the width big
-            'backgroundColor':'white'
-        },
-    ),
-    html.Hr(),
-    html.Div(id='datatable-query-structure', style={'whitespace': 'pre'})
-
+        # define the detail of datatable
+        dash_table.DataTable(
+            id='datatable-advanced-filtering',
+            columns=[
+                {'name': i, 'id': i, 'deletable': True} for i in df.columns
+                # omit the id column
+                if i != 'id'
+            ],
+            data=df.to_dict('records'),
+            editable=True,  # editing the cells
+            page_action='native',  # all data is passed to the table up-front or not ('none')
+            page_size=10,  # number of rows visible per page
+            filter_action="native",  # filtering by column
+            style_cell={
+                'textAlign': 'left',  # align text columns to left. By default they are aligned to right
+                'minWidth': 210, 'maxWidth': 210, 'Width': 210,
+                # cause some of the texts are too long so I make the width big
+                'backgroundColor': 'white'
+            },
+        ),
+        html.Hr()
+    ])
 ])
-])
-
-
-#bar chart
-@app.callback(
-    Output('bar-chart', 'children'),
-    Input('datatable-advanced-filtering', "derived_virtual_data"),
-)
-def update_bar(all_rows_data):
-    dff = pd.DataFrame(all_rows_data)
-    if "time" in dff and "sensor_one_temp" in dff:
-        return [
-            dcc.Graph(
-                id='bar-chart',
-                figure={
-                    'data':[
-                        # six bars for six different data
-                        {'x': df['time'], 'y': df['sensor_one_temp'], 'type':'bar', 'name':'sensor_one_temp'},
-                        {'x': df['time'], 'y': df['sensor_one_vib'], 'type':'bar', 'name':'sensor_one_vib'},
-                        {'x': df['time'], 'y': df['sensor_two_temp'], 'type':'bar', 'name': 'sensor_two_temp'},
-                        {'x': df['time'], 'y': df['sensor_two_temp_vib'], 'type':'bar', 'name': 'sensor_two_temp_vib'},
-                        {'x': df['time'], 'y': df['sensor_three_temp'], 'type':'bar', 'name': 'sensor_three_temp'},
-                        {'x': df['time'], 'y': df['sensor_three_temp_vib'], 'type':'bar', 'name': 'sensor_three_temp_vib'}
-                    ],
-                    'layout':{
-                        'title': 'Bar Chart' #the title of the bar chart
-                    }
-                }
-            )
-        ]
-
-# line graph
-@app.callback(
-    Output('line-graph', 'children'),
-    Input('datatable-advanced-filtering', "derived_virtual_data"),
-)
-def update_line(all_rows_data):
-    dff = pd.DataFrame(all_rows_data)
-    if "time" in dff and "sensor_one_temp" in dff:
-        return [
-            dcc.Graph(
-                id='line-graph',
-                figure={
-                    'data':[
-                        # six lines for six different data
-                        {'x': df['time'], 'y': df['sensor_one_temp'], 'type':'line', 'name':'sensor_one_temp'},
-                        {'x': df['time'], 'y': df['sensor_one_vib'], 'type':'line', 'name':'sensor_one_vib'},
-                        {'x': df['time'], 'y': df['sensor_two_temp'], 'type':'line', 'name': 'sensor_two_temp'},
-                        {'x': df['time'], 'y': df['sensor_two_temp_vib'], 'type':'line', 'name': 'sensor_two_temp_vib'},
-                        {'x': df['time'], 'y': df['sensor_three_temp'], 'type':'line', 'name': 'sensor_three_temp'},
-                        {'x': df['time'], 'y': df['sensor_three_temp_vib'], 'type':'line', 'name': 'sensor_three_temp_vib'}
-                    ],
-                    'layout':{
-                        'title': 'Line Graph' #the title of the line Graph
-                    }
-                }
-            )
-        ]
-
 
 if __name__ == '__main__':
     app.run_server(debug=True)
