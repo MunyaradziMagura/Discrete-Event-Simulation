@@ -8,8 +8,8 @@ import files
 
 # field names for csv
 # sensor 1
-fields = ['sensorID', 'time','temperature','vibration']
-alarm_feilds = ['sensorID', 'time','temp_alert','vib_alert','temp_warning','vib_warning','temp_emergency','vib__emergency']
+fields = ['sensor(pk)', 'time(pk)','temperature','vibration']
+alarm_feilds = ['sensor(pk)', 'time(pk)','temp_alert','vib_alert','temp_warning','vib_warning','temp_emergency','vib__emergency']
 
 # data rows of csv file
 rows = []
@@ -34,7 +34,7 @@ def pipe_generator(env, start_temperature, start_vibration, limit_temperature, l
     print('sensorID', 'time', 'value','sensor_type','alert','warning','emergency')
 
     # because there are only three sensors
-    while True and sensor_id < int(files.get_sensor):
+    while True and sensor_id < int(files.get_sensor()):
 
         # set id
         files.set_sensor_id(sensor_id)
@@ -200,8 +200,9 @@ warning_vib = [files.get_sensor_vib_warning(
 env.process(pipe_generator(env, start_temperature, start_vibration, limit_temperature,
             limit_vibration, sensor_interval_time, sensor, warning_temp, warning_vib, rows))
 
+sensor_number = int(files.get_sensor())
 # run the simulation. calculated by: number of sensors (3) and how long they can each run for (sensor_interval_time) 
-env.run(until=sensor_interval_time * int(files.get_sensor))
+env.run(until=sensor_interval_time * sensor_number)
 
 
 # writing to csv file

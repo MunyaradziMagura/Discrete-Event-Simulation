@@ -19,10 +19,11 @@ def clean_csv(name):
     df.to_csv(f'{name}', index=False)
 
 # get the config file
-with open("discrete event simulation\Configuration_Data.csv") as file_name:
-    file_read = csv.reader(file_name)
-    #  get the array and remove the first row
-    array = list(file_read)
+file_CSV = open('discrete_event_simulation\Configuration_Data.csv')
+data_CSV = csv.reader(file_CSV)
+list_CSV = list(data_CSV)
+array = list_CSV[0]
+print(array)
 
 #  set getters for each config element: gets values from specific indexes of a csv file turned into an array
 def get_start_temperature():
