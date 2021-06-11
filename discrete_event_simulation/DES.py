@@ -31,7 +31,7 @@ def pipe_generator(env, start_temperature, start_vibration, limit_temperature, l
 
     # print for clearity when looking at terminal output
     # print("sensor1  | sensor2 | sensor3")
-    print('sensorID', 'time', 'value','sensor_type','alert','warning','emergency')
+    print('sensor_number', 'time', 'value','sensor_type','alert','warning','emergency')
 
     # because there are only three sensors
     while True and sensor_id < int(files.get_sensor()):
@@ -166,8 +166,8 @@ def sensor_generator(env, start_temperature, highest_temp, start_vibration, limi
             temperature_current = f'{temperature:5.2f} '
             vibration_current = f'{vibration}'
             
-            # fields = ['sensorID', 'time','temperature','vibration']
-            # alarm_feilds = ['sensorID', 'time','temp_alert','vib_alarm','temp_warning','vib_warning','temp_emergency','vib_emergency']
+            # fields = ['sensor_number', 'time','temperature','vibration']
+            # alarm_feilds = ['sensor_number', 'time','temp_alert','vib_alarm','temp_warning','vib_warning','temp_emergency','vib_emergency']
             print(f'{files.get_sensor_id()} {time}  {temperature_current} {vibration_current}')
             rows.append([files.get_sensor_id(),time,temperature_current,vibration_current])
             # rows.append(current_viv_values)
