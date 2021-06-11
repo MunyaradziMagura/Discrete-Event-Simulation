@@ -23,7 +23,7 @@ alarm_file = 'alarm.csv'
 
 
 #  generate the pipe
-def pipe_generator(env, start_temperature, start_vibration, limit_temperature, limit_vibration, sensor_interval_time, sensor, warning_temp, warning_vib, rows):
+def pipe_generator(env, start_temperature, start_vibration, limit_temperature, limit_vibration, single_sensor_runtime, sensor, warning_temp, warning_vib, rows):
 
     # inilise which sensor is being simulated & what is the highest temp
     sensor_id = 0
@@ -48,15 +48,15 @@ def pipe_generator(env, start_temperature, start_vibration, limit_temperature, l
             # update stating temp
             start_temperature += highest_temp - start_temperature
 
-        #  create an instance of the water within the pipe
-        water = sensor_generator(env, sensor_id, start_temperature, highest_temp, start_vibration,
-                                 limit_temperature, limit_vibration, sensor_interval_time, sensor, warning_temp, warning_vib)
+        #  create an instance of the pipe_activity within the pipe
+        pipe_activity = sensor_generator(env, start_temperature, highest_temp, start_vibration,
+                                 limit_temperature, limit_vibration, single_sensor_runtime, sensor, warning_temp, warning_vib)
 
-        # run the water instance for this sensor i.e. simulate water running though this section of the pipe
-        env.process(water)
+        # run the pipe_activity instance for this sensor i.e. simulate pipe_activity running though this section of the pipe
+        env.process(pipe_activity)
 
-        # time until the next sensor is reached by water
-        time = random.expovariate(1.0 / sensor_interval_time)
+        # time until the next sensor is reached by pipe_activity
+        time = random.expovariate(1.0 / single_sensor_runtime)
         # create a new sensor when time has passed
         yield env.timeout(time, highest_temp)
         rows.append(csv_data)
@@ -65,10 +65,10 @@ def pipe_generator(env, start_temperature, start_vibration, limit_temperature, l
         sensor_id += 1
 
 
-# this function is the waters journey through the pipe
-def sensor_generator(env, sensor_id, start_temperature, highest_temp, start_vibration, limit_temperature, limit_vibration, sensor_interval_time, sensor, warning_temp, warning_vib):
+# this function is the pipe_activitys journey through the pipe
+def sensor_generator(env, start_temperature, highest_temp, start_vibration, limit_temperature, limit_vibration, single_sensor_runtime, sensor, warning_temp, warning_vib):
     
-    # record the time the water starts changing tempreture at this sensor
+    # record the time the pipe_activity starts changing tempreture at this sensor
     current_time = f'{env.now:5.2f}'
 
     # temperature
@@ -108,7 +108,7 @@ def sensor_generator(env, sensor_id, start_temperature, highest_temp, start_vibr
     # request the sensor data
     with sensor.request() as req:
 
-        con_time = random.expovariate(1.0 / sensor_interval_time)
+        con_time = random.expovariate(1.0 / single_sensor_runtime)
 
         while True:
             # reset values to false
@@ -189,7 +189,7 @@ limit_temperature = int(files.get_limit_temperature())
 limit_vibration = int(files.get_limit_vibration())
 
 # max time each sensor can run. will be timed by three for the number of sensors
-sensor_interval_time = int(files.get_test_time())
+single_sensor_runtime = int(files.get_test_time())
 
 # [warning, alerm, emergency]
 warning_temp = [files.get_sensor_temp_warning(
@@ -198,11 +198,11 @@ warning_vib = [files.get_sensor_vib_warning(
 ), files.get_sensor_vib_alart(), files.get_sensor_vib_emergency()]
 
 env.process(pipe_generator(env, start_temperature, start_vibration, limit_temperature,
-            limit_vibration, sensor_interval_time, sensor, warning_temp, warning_vib, rows))
+            limit_vibration, single_sensor_runtime, sensor, warning_temp, warning_vib, rows))
 
 sensor_number = int(files.get_sensor())
-# run the simulation. calculated by: number of sensors (3) and how long they can each run for (sensor_interval_time) 
-env.run(until=sensor_interval_time * sensor_number)
+# run the simulation. calculated by: number of sensors (3) and how long they can each run for (single_sensor_runtime) 
+env.run(until=single_sensor_runtime * sensor_number)
 
 
 # writing to csv file
