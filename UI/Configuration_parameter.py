@@ -11,6 +11,7 @@ class Configuration_parameter:
         self.senor_vib_warning = 0
         self.senor_vib_alarm = 0
         self.senor_vib_emergency = 0
+        self.senor_number = 0
 
     def get_start_temperature(self):
         return self.start_temperature
@@ -77,3 +78,9 @@ class Configuration_parameter:
 
     def set_vib_sensor_emergency(self, value):
         self.senor_vib_emergency = value
+
+    def get_sensor_number(self):
+        return self.senor_number
+
+    def set_sensor_number(self, value):
+        self.senor_number = value

@@ -98,9 +98,7 @@ class Ui_Configuration_MainWindow(object):
         self.tabWidget.setObjectName("tabWidget")
         self.tab = QtWidgets.QWidget()
         self.tab.setObjectName("tab")
-        self.verticalLayout_19 = QtWidgets.QVBoxLayout(self.tab)
-        self.verticalLayout_19.setObjectName("verticalLayout_19")
-        self.verticalLayout_2 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.tab)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
@@ -115,7 +113,7 @@ class Ui_Configuration_MainWindow(object):
         self.horizontalLayout_23.addWidget(self.label_25)
         self.lineEdit_start_temp = QtWidgets.QLineEdit(self.tab)
         self.lineEdit_start_temp.setObjectName("lineEdit_start_temp")
-        self.lineEdit_start_temp.setValidator(QtGui.QDoubleValidator()) # Limit input type. Avoid illegal input.
+        self.lineEdit_start_temp.setValidator(QtGui.QDoubleValidator())  # Limit input type. Avoid illegal input.
         self.horizontalLayout_23.addWidget(self.lineEdit_start_temp)
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_23.addItem(spacerItem1)
@@ -181,8 +179,6 @@ class Ui_Configuration_MainWindow(object):
         self.verticalLayout_14.setStretch(4, 3)
         self.horizontalLayout_2.addLayout(self.verticalLayout_14)
         self.verticalLayout_2.addLayout(self.horizontalLayout_2)
-        spacerItem10 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout_2.addItem(spacerItem10)
         self.horizontalLayout_25 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_25.setObjectName("horizontalLayout_25")
         self.label_33 = QtWidgets.QLabel(self.tab)
@@ -192,14 +188,23 @@ class Ui_Configuration_MainWindow(object):
         self.lineEdit_interval_time.setObjectName("lineEdit_interval_time")
         self.lineEdit_interval_time.setValidator(QtGui.QDoubleValidator())
         self.horizontalLayout_25.addWidget(self.lineEdit_interval_time)
-        spacerItem11 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_25.addItem(spacerItem11)
+        spacerItem10 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_25.addItem(spacerItem10)
         self.verticalLayout_2.addLayout(self.horizontalLayout_25)
+        self.horizontalLayout_26 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_26.setObjectName("horizontalLayout_26")
+        self.label_34 = QtWidgets.QLabel(self.tab)
+        self.label_34.setObjectName("label_34")
+        self.horizontalLayout_26.addWidget(self.label_34)
+        self.lineEdit_number_of_sensor = QtWidgets.QLineEdit(self.tab)
+        self.lineEdit_number_of_sensor.setObjectName("lineEdit_number_of_sensor")
+        self.lineEdit_number_of_sensor.setValidator(QtGui.QDoubleValidator())
+        self.horizontalLayout_26.addWidget(self.lineEdit_number_of_sensor)
+        spacerItem11 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_26.addItem(spacerItem11)
+        self.verticalLayout_2.addLayout(self.horizontalLayout_26)
         spacerItem12 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout_2.addItem(spacerItem12)
-        self.verticalLayout_2.setStretch(0, 6)
-        self.verticalLayout_2.setStretch(2, 2)
-        self.verticalLayout_19.addLayout(self.verticalLayout_2)
         self.tabWidget.addTab(self.tab, "")
         self.tab_2 = QtWidgets.QWidget()
         self.tab_2.setObjectName("tab_2")
@@ -351,28 +356,27 @@ class Ui_Configuration_MainWindow(object):
             "setStyleSheet (\"venus--TitleBar {background-color: rgb(0,0,0);color: rgb(255,255,255);}\");")
         self.new_Button.setObjectName("new_Button")
         self.new_Button.clicked.connect(
-            self.button_clicked_new)  # Use "connect" to send the action trigger signal to the specified function.
+                self.button_clicked_new)  # Use "connect" to send the action trigger signal to the specified function.
         self.verticalLayout_17.addWidget(self.new_Button)
         self.save_Button = QtWidgets.QPushButton(self.groupBox)
         self.save_Button.setObjectName("save_Button")
-        self.verticalLayout_17.addWidget(self.save_Button)
         self.save_Button.clicked.connect(self.button_clicked_save)
+        self.verticalLayout_17.addWidget(self.save_Button)
         self.open_Button = QtWidgets.QPushButton(self.groupBox)
         self.open_Button.setObjectName("open_Button")
-        self.verticalLayout_17.addWidget(self.open_Button)
         self.open_Button.clicked.connect(self.button_clicked_open)
+        self.verticalLayout_17.addWidget(self.open_Button)
         self.verticalLayout_18.addLayout(self.verticalLayout_17)
         self.verticalLayout.addWidget(self.groupBox)
         self.start_Button = QtWidgets.QPushButton(self.centralwidget)
         self.start_Button.setObjectName("start_Button")
-        self.verticalLayout.addWidget(self.start_Button)
         self.start_Button.clicked.connect(self.button_clicked_start)
+        self.verticalLayout.addWidget(self.start_Button)
         self.end_Button = QtWidgets.QPushButton(self.centralwidget)
         self.end_Button.setObjectName("end_Button")
         self.end_Button.clicked.connect(self.button_clicked_end)
         self.verticalLayout.addWidget(self.end_Button)
         self.horizontalLayout.addLayout(self.verticalLayout)
-        self.horizontalLayout.setStretch(0, 11)
         self.horizontalLayout.setStretch(1, 4)
         Configuration_MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(Configuration_MainWindow)
@@ -397,6 +401,8 @@ class Ui_Configuration_MainWindow(object):
         self.lineEdit_limit_vib.setText(_translate("Configuration_MainWindow", "0"))
         self.label_33.setText(_translate("Configuration_MainWindow", "Test Time"))
         self.lineEdit_interval_time.setText(_translate("Configuration_MainWindow", "0"))
+        self.label_34.setText(_translate("Configuration_MainWindow", "NumberOf Sensor"))
+        self.lineEdit_number_of_sensor.setText(_translate("Configuration_MainWindow", "0"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("Configuration_MainWindow", "Basic"))
         self.groupBox_3.setTitle(_translate("Configuration_MainWindow", "Temperature"))
         self.label_2.setText(_translate("Configuration_MainWindow", "Warning"))
@@ -436,7 +442,7 @@ class Ui_Configuration_MainWindow(object):
 
     def check_basic(self):
         # This method checks whether the information in the "basic" tag is empty.The return value is Boolean.
-        if not self.lineEdit_start_temp.text() or not self.lineEdit_start_vib.text() or not self.lineEdit_limit_temp.text() or not self.lineEdit_limit_vib.text() or not self.lineEdit_interval_time.text():
+        if not self.lineEdit_start_temp.text() or not self.lineEdit_start_vib.text() or not self.lineEdit_limit_temp.text() or not self.lineEdit_limit_vib.text() or not self.lineEdit_interval_time.text() or not self.lineEdit_number_of_sensor.text():
             self.msg_non_empty_check()
             return False
         else:
@@ -455,6 +461,7 @@ class Ui_Configuration_MainWindow(object):
         self.parameter.set_vib_sensor_warning(float(self.lineEdit_vib_warning.text()))
         self.parameter.set_vib_sensor_alarm(float(self.lineEdit_vib_alarm.text()))
         self.parameter.set_vib_sensor_emergency(float(self.lineEdit_vib_emergency.text()))
+        self.parameter.set_sensor_number(float(self.lineEdit_number_of_sensor.text()))
 
     def check_sensor(self):
         # This method is used to detect whether the value in the "Sensor" class is empty. The return value is Boolean.
@@ -492,6 +499,7 @@ class Ui_Configuration_MainWindow(object):
         self.lineEdit_vib_warning.setEnabled(False)
         self.lineEdit_vib_alarm.setEnabled(False)
         self.lineEdit_vib_emergency.setEnabled(False)
+        self.lineEdit_number_of_sensor.setEnabled(False)
 
     def edit_available(self):
         self.lineEdit_start_temp.setEnabled(True)
@@ -505,6 +513,7 @@ class Ui_Configuration_MainWindow(object):
         self.lineEdit_vib_warning.setEnabled(True)
         self.lineEdit_vib_alarm.setEnabled(True)
         self.lineEdit_vib_emergency.setEnabled(True)
+        self.lineEdit_number_of_sensor.setEnabled(True)
 
     # This method is used to reset the input box data. The reset value is 0.
     def reset(self):
@@ -519,6 +528,7 @@ class Ui_Configuration_MainWindow(object):
         self.lineEdit_vib_warning.setText("0")
         self.lineEdit_vib_alarm.setText("0")
         self.lineEdit_vib_emergency.setText("0")
+        self.lineEdit_number_of_sensor.setText("0")
         self.set_data()
 
     # The following are button events, please add code under the corresponding method.
@@ -528,6 +538,7 @@ class Ui_Configuration_MainWindow(object):
                 self.start_Button.setText("PAUSE")
                 self.edit_close()
                 # Please start the simulation here
+
             else:
                 pass
         elif self.start_Button.text() == "PAUSE":
@@ -575,6 +586,7 @@ class Ui_Configuration_MainWindow(object):
                 self.lineEdit_vib_warning.setText(temporary_row[8])
                 self.lineEdit_vib_alarm.setText(temporary_row[9])
                 self.lineEdit_vib_emergency.setText(temporary_row[10])
+                self.lineEdit_number_of_sensor.setText(temporary_row[11])
                 self.set_data()
         except:
             print("EXIT")
@@ -593,20 +605,22 @@ class Ui_Configuration_MainWindow(object):
                 writer = csv.writer(csvfile)
                 writer.writerows(
                     [["Start temperature", "Limit temperature", "Start Vibration", "Limit Vibration", "Teat Time"
-                         , "Sensor_temp_warning", "Sensor_temp_alart", "Sensor_temp_emergency", "Sensor_vib_warning "
-                         , "Sensor_vib_alart", "Sensor_vib_emergency"],
+                         , "Sensor temp warning", "Sensor temp alart", "Sensor_temp_emergency", "Sensor vib warning "
+                         , "Sensor vib alart", "Sensor vib emergency", "Number of sensor "],
                      [self.lineEdit_start_temp.text(), self.lineEdit_limit_temp.text(), self.lineEdit_start_vib.text(),
                       self.lineEdit_limit_vib.text(), self.lineEdit_interval_time.text(),
                       self.lineEdit_temp_warning.text(),
                       self.lineEdit_temp_alarm.text(), self.lineEdit_temp_emergency.text(),
                       self.lineEdit_vib_warning.text(),
-                      self.lineEdit_vib_alarm.text(), self.lineEdit_vib_emergency.text()]])
+                      self.lineEdit_vib_alarm.text(), self.lineEdit_vib_emergency.text(),
+                      self.lineEdit_number_of_sensor.text()]])
         except:
             QMessageBox.critical(None, "ERROR", "Failed to save file")
 
 
 if __name__ == '__main__':
     from PyQt5 import QtCore
+
     # Importance!Make sure that the window adapts to the screen resolution.↓
     QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)
     app = QApplication(sys.argv)

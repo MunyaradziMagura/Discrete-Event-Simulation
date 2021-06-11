@@ -1,2 +1,2 @@
-﻿Start temperature,Limit temperature,Start Vibration,Limit Vibration,Teat Time,Sensor_temp_warning,Sensor_temp_alart,Sensor_temp_emergency,Sensor_vib_warning,Sensor_vib_alart,Sensor_vib_emergency
-0,1,2,3,4,5,6,7,8,9,10
+Start temperature,Limit temperature,Start Vibration,Limit Vibration,Teat Time,Sensor temp warning,Sensor temp alart,Sensor_temp_emergency,Sensor vib warning ,Sensor vib alart,Sensor vib emergency,Number of sensor 
+0,0,0,0,1111,0,0,0,0,0,0,0
