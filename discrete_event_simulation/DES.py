@@ -8,8 +8,9 @@ import files
 
 # field names for csv
 # sensor 1
-fields = ['sensor(pk)', 'time(pk)','temperature','vibration']
-alarm_feilds = ['sensor(pk)', 'time(pk)','temp_alert','vib_alert','temp_warning','vib_warning','temp_emergency','vib__emergency']
+fields = ['sensor(pk)', 'time(pk)', 'temperature', 'vibration']
+alarm_feilds = ['sensor(pk)', 'time(pk)', 'temp_alert', 'vib_alert',
+                'temp_warning', 'vib_warning', 'temp_emergency', 'vib__emergency']
 
 # data rows of csv file
 rows = []
@@ -30,14 +31,15 @@ def pipe_generator(env, start_temperature, start_vibration, limit_temperature, l
     highest_temp = 0
 
     # print for clearity when looking at terminal output
-    print('sensor_number', 'time', 'value','sensor_type','alert','warning','emergency')
+    print('sensor_number', 'time', 'value',
+          'sensor_type', 'alert', 'warning', 'emergency')
 
-    # because there are only three sensors
+    # loop through x number of sensors
     while True and sensor_id < int(files.get_sensor()):
 
         # set id
         files.set_sensor_id(sensor_id)
-        
+
         # store csv data into this array for each sensor
         csv_data = []
 
@@ -49,7 +51,7 @@ def pipe_generator(env, start_temperature, start_vibration, limit_temperature, l
 
         #  create an instance of the pipe_activity within the pipe
         pipe_activity = sensor_generator(env, start_temperature, highest_temp, start_vibration,
-                                 limit_temperature, limit_vibration, single_sensor_runtime, sensor, warning_temp, warning_vib)
+                                         limit_temperature, limit_vibration, single_sensor_runtime, sensor, warning_temp, warning_vib)
 
         # run the pipe_activity instance for this sensor i.e. simulate pipe_activity running though this section of the pipe
         env.process(pipe_activity)
@@ -64,9 +66,9 @@ def pipe_generator(env, start_temperature, start_vibration, limit_temperature, l
         sensor_id += 1
 
 
-# this function is the pipe_activitys journey through the pipe
+# this function is the pipe_activitys through the pipe
 def sensor_generator(env, start_temperature, highest_temp, start_vibration, limit_temperature, limit_vibration, single_sensor_runtime, sensor, warning_temp, warning_vib):
-    
+
     # record the time the pipe_activity starts changing tempreture at this sensor
     current_time = f'{env.now:5.2f}'
 
@@ -99,10 +101,12 @@ def sensor_generator(env, start_temperature, highest_temp, start_vibration, limi
             vib_alerm = True
             if vibration > warning_vib[2]:
                 vib_emergency = True
-    
+
     # get the staring states of each sensor
-    rows.append([files.get_sensor_id(),current_time,start_temperature,start_vibration])
-    alarm_rows.append([files.get_sensor_id(),current_time, temp_warning,vib_warning, temp_alerm,vib_alerm,temp_emergency,vib_emergency])
+    rows.append([files.get_sensor_id(), current_time,
+                start_temperature, start_vibration])
+    alarm_rows.append([files.get_sensor_id(), current_time, temp_warning,
+                      vib_warning, temp_alerm, vib_alerm, temp_emergency, vib_emergency])
 
     # request the sensor data
     with sensor.request() as req:
@@ -137,7 +141,7 @@ def sensor_generator(env, start_temperature, highest_temp, start_vibration, limi
             if temperature > limit_temperature:
                 print("pipe temperture limit reached")
                 temperature -= random.expovariate(1.0 /
-                                                  interarrival) + (highest_temp / 3)
+                                                  interarrival) + (highest_temp / int(files.get_sensor()))
             else:
                 temperature += random.expovariate(1.0/interarrival)
 
@@ -164,13 +168,16 @@ def sensor_generator(env, start_temperature, highest_temp, start_vibration, limi
             time = f'{env.now + 0.01:5.2f}'
             temperature_current = f'{temperature:5.2f} '
             vibration_current = f'{vibration}'
-            
+
             # fields = ['sensor_number', 'time','temperature','vibration']
             # alarm_feilds = ['sensor_number', 'time','temp_alert','vib_alarm','temp_warning','vib_warning','temp_emergency','vib_emergency']
-            print(f'{files.get_sensor_id()} {time}  {temperature_current} {vibration_current}')
-            rows.append([files.get_sensor_id(),time,temperature_current,vibration_current])
+            print(
+                f'{files.get_sensor_id()} {time}  {temperature_current} {vibration_current}')
+            rows.append([files.get_sensor_id(), time,
+                        temperature_current, vibration_current])
             # rows.append(current_viv_values)
-            alarm_rows.append([files.get_sensor_id(),time, temp_warning,vib_warning, temp_alerm,vib_alerm,temp_emergency,vib_emergency])
+            alarm_rows.append([files.get_sensor_id(), time, temp_warning,
+                              vib_warning, temp_alerm, vib_alerm, temp_emergency, vib_emergency])
             # instead of yielding the arrival time, yield a Timeout Event
             yield env.timeout(interarrival, highest_temp)
 
@@ -200,7 +207,7 @@ env.process(pipe_generator(env, start_temperature, start_vibration, limit_temper
             limit_vibration, single_sensor_runtime, sensor, warning_temp, warning_vib, rows))
 
 sensor_number = int(files.get_sensor())
-# run the simulation. calculated by: number of sensors (3) and how long they can each run for (single_sensor_runtime) 
+# run the simulation. calculated by: number of sensors (sensor_number)and how long they can each run for (sensor_interval_time)
 env.run(until=single_sensor_runtime * sensor_number)
 
 
@@ -213,8 +220,8 @@ with open(filename, 'w') as csvfile:
     # writing the data rows
     csvwriter.writerows(rows)
 
-# write csv for alarms 
-with open(alarm_file,'w') as csvfile:
+# write csv for alarms
+with open(alarm_file, 'w') as csvfile:
     csvwriter = csv.writer(csvfile)
     csvwriter.writerow(alarm_feilds)
     csvwriter.writerows(alarm_rows)
